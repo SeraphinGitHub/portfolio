@@ -1,0 +1,60 @@
+[
+   {
+      "id": "1",
+      "href": "https://tokatchi-conception.netlify.app/",
+      "title": "Tokatchi Conception",
+      "description": "Ancien site web, dessinateur-projeteur indépendant, études et conception 3D (Site non responsive !)",
+      "imageUrl": "./TokatchiConception.jpg",
+      "createdAt": "20 Novembre 2020"
+   },
+
+   {
+      "id": "2",
+      "href": "https://seraphingithub.github.io/FatetSeraphin_2_03012021/",
+      "title": "Reservia - Projet N°2",
+      "description": "Formation OpenClassRooms, création d'un site web à partir d'une maquette",
+      "skills": ["Html", "CSS", "FlexBox", "Responsive design"],
+      "imageUrl": "./Reservia.jpg",
+      "createdAt": "3 Janvier 2021"
+   },
+
+   {
+      "id": "3",
+      "href": "https://seraphingithub.github.io/FatetSeraphin_3_01032021/",
+      "title": "Oh My Food - Projet N°3",
+      "description": "Formation OpenClassRooms, rendre une page web dynamique avec des animations CSS",
+      "skills": ["Animations CSS", "SASS", "Responsive design"],
+      "imageUrl": "./OhMyFood.jpg",
+      "createdAt": "1er Mars 2021"
+   },
+
+   {
+      "id": "4",
+      "href": "https://seraphingithub.github.io/FatetSeraphin_4_12042021/",
+      "title": "Oh My Food - Projet N°3",
+      "description": "Formation OpenClassRooms, optimisation d'un site web existant",
+      "skills": ["SEO", "Accessibilité"],
+      "imageUrl": "./LaChouette.jpg",
+      "createdAt": "12 Avril 2021"
+   },
+
+   {
+      "id": "5",
+      "href": "https://seraphingithub.github.io/FatetSeraphin_5_02062021_Online",
+      "title": "Orinoco - Projet N°5",
+      "description": "Formation OpenClassRooms, création d'un site E-commerce",
+      "skills": ["JavaScript", "Fetch API"],
+      "imageUrl": "./Orinoco.jpg",
+      "createdAt": "2 Juin 2021"
+   },
+
+   {
+      "id": "6",
+      "href": "https://www.youtube.com/watch?v=2B86xBcuW1s",
+      "title": "Groupomania - Projet N°7",
+      "description": "Formation OpenClassRooms, création d'un réseau social d'entreprise",
+      "skills": ["Node.js", "Vue.js", "MySQL"],
+      "imageUrl": "./Groupomania.jpg",
+      "createdAt": "12 Juillet 2021"
+   }
+]

@@ -1,0 +1,111 @@
+[
+   {
+      "id": "1",
+      "href": "https://tokatchi-conception.netlify.app/",
+      "title": "Tokatchi Conception",
+      "description": "Ancien site web, dessinateur en bureau d'études et conception 3D",
+      "skills": ["HTML / CSS"],
+      "imageUrl": "./images/TokatchiConception.jpg",
+      "createdAt": "Novembre 2020"
+   },
+
+   {
+      "id": "2",
+      "href": "https://seraphingithub.github.io/FatetSeraphin_2_03012021/",
+      "title": "Reservia -OpenClassrooms",
+      "description": "Projet N°2 - Création d'un site web à partir d'une maquette.",
+      "skills": ["HTML / CSS"],
+      "imageUrl": "./images/Reservia.jpg",
+      "createdAt": "Janvier 2021"
+   },
+
+   {
+      "id": "3",
+      "href": "https://seraphingithub.github.io/FatetSeraphin_3_01032021/",
+      "title": "Oh My Food -OpenClassrooms",
+      "description": "Projet N°3 - Rendre une page web dynamique avec des animations CSS.",
+      "skills": ["HTML / CSS", "SASS"],
+      "imageUrl": "./images/OhMyFood.jpg",
+      "createdAt": "Mars 2021"
+   },
+
+   {
+      "id": "4",
+      "href": "https://seraphingithub.github.io/FatetSeraphin_4_12042021/",
+      "title": "La Chouette -OpenClassrooms",
+      "description": "Projet N°4 - Optimisation d'un site web existant.",
+      "skills": ["HTML / CSS", "JS", "SEO", "Accessibilité"],
+      "imageUrl": "./images/LaChouette.jpg",
+      "createdAt": "Avril 2021"
+   },
+
+   {
+      "id": "5",
+      "href": "https://seraphingithub.github.io/FatetSeraphin_5_02062021_Online",
+      "title": "Orinoco -OpenClassrooms",
+      "description": "Projet N°5 - Création d'un site E-commerce.",
+      "skills": ["HTML / CSS", "JS"],
+      "imageUrl": "./images/Orinoco.jpg",
+      "createdAt": "Juin 2021"
+   },
+
+   {
+      "id": "6",
+      "href": "https://www.youtube.com/watch?v=2B86xBcuW1s",
+      "title": "Groupomania -OpenClassrooms",
+      "description": "Projet N°7 - Création d'un réseau social d'entreprise en fullstack.",
+      "skills": ["JS", "Vue", "Node", "Express", "MySQL", "Sequelize ORM", "SQL"],
+      "imageUrl": "./images/Groupomania.jpg",
+      "createdAt": "Juillet 2021"
+   },
+
+   {
+      "id": "7",
+      "href": "https://github.com/SeraphinGitHub/Social-Network---PHP",
+      "title": "Social Network -ENI",
+      "description": "Projet avec ENI école informatique - Création d'un réseau social en environnement PHP en fullstack. (non déployé - lien GitHub)",
+      "skills": ["PHP", "Twigg", "Composer", "MySQL", "SQL"],
+      "imageUrl": "./images/Social-Network-PHP.jpg",
+      "createdAt": "Décembre 2021"
+   },
+
+   {
+      "id": "8",
+      "href": "https://heroic-adventure.onrender.com/",
+      "title": "Heroic Adventure -MMORPG",
+      "description": "Web app, flash-game multijoueurs en temps réel, encore en développement. (Projet personnel)",
+      "skills": ["HTML / CSS", "JS", "Node", "Express", "Socket.io"],
+      "imageUrl": "./images/Heroic-Adventure.jpg",
+      "createdAt": "Février 2022"
+   },
+
+   {
+      "id": "9",
+      "href": "https://github.com/SeraphinGitHub/Sword-Battle--Client/commits/master",
+      "title": "Sword Battle -App Android",
+      "description": "App android multijoueurs en temps réel, lien GitHub. (Projet personnel)",
+      "skills": ["C#", "Unity Engine", "JS", "Node", "Express", "Socket.io"],
+      "imageUrl": "./images/Sword-Battle.jpg",
+      "createdAt": "Juillet 2022"
+   },
+
+   {
+      "id": "10",
+      "href": "https://sf-astar-pathfinding.netlify.app/",
+      "title": "A* Pathfinder algorithm -Démo",
+      "description": "Démo d'algorithme de trouveur de chemin. (Projet personnel)",
+      "skills": ["HTML / CSS", "JS"],
+      "imageUrl": "./images/Astar-Pathfinder.jpg",
+      "createdAt": "Sept 2022"
+   },
+
+   {
+      "id": "11",
+      "href": "https://sf-map-editor.netlify.app/",
+      "title": "2D Map Editor -Stade: M.V.P.",
+      "description": "Créateur de carte pour jeux en 2D, basé sur système de ''tuile'', encore en développement.. (Projet personnel)",
+      "skills": ["Vue", "TS"],
+      "imageUrl": "./images/2D-map-editor.jpg",
+      "createdAt": "Février 2023"
+   }
+]
