@@ -2,110 +2,297 @@
    {
       "id": "1",
       "href": "https://tokatchi-conception.netlify.app/",
-      "title": "Tokatchi Conception",
-      "description": "Ancien site web, dessinateur en bureau d'études et conception 3D",
       "skills": ["HTML / CSS"],
       "imageUrl": "./images/TokatchiConception.jpg",
-      "createdAt": "Novembre 2020"
+
+      "title": {
+         "FR": "Tokatchi Conception",
+         "EN": "Tokatchi Conception",
+         "JP": ""
+      },
+
+      "description": {
+         "FR": "Ancien site web, dessinateur en bureau d'études et conception 3D",
+         "EN": "Former website, draftsman in research department and 3D design",
+         "JP": ""
+      },
+
+      "createdAt": {
+         "FR": "Novembre 2020",
+         "EN": "November 2020",
+         "JP": "2020年 11月"
+      },
+
+      "isGolden": false
    },
 
    {
       "id": "2",
       "href": "https://seraphingithub.github.io/FatetSeraphin_2_03012021/",
-      "title": "Reservia -OpenClassrooms",
-      "description": "Projet N°2 - Création d'un site web à partir d'une maquette.",
       "skills": ["HTML / CSS"],
       "imageUrl": "./images/Reservia.jpg",
-      "createdAt": "Janvier 2021"
+
+      "title": {
+         "FR": "Reservia -OpenClassrooms",
+         "EN": "Reservia -OpenClassrooms",
+         "JP": ""
+      },
+
+      "description": {
+         "FR": "Projet N°2 - Création d'un site web à partir d'une maquette.",
+         "EN": "Project N°2 - Creation of a website from a mockup.",
+         "JP": ""
+      },
+
+      "createdAt": {
+         "FR": "Janvier 2021",
+         "EN": "January 2021",
+         "JP": "2021年 1月"
+      },
+
+      "isGolden": false
    },
 
    {
       "id": "3",
       "href": "https://seraphingithub.github.io/FatetSeraphin_3_01032021/",
-      "title": "Oh My Food -OpenClassrooms",
-      "description": "Projet N°3 - Rendre une page web dynamique avec des animations CSS.",
-      "skills": ["HTML / CSS", "SASS"],
       "imageUrl": "./images/OhMyFood.jpg",
-      "createdAt": "Mars 2021"
+      "skills": ["HTML / CSS", "SASS"],
+
+      "title": {
+         "FR": "Oh My Food -OpenClassrooms",
+         "EN": "Oh My Food -OpenClassrooms",
+         "JP": ""
+      },
+
+      "description": {
+         "FR": "Projet N°3 - Rendre une page web dynamique avec des animations CSS.",
+         "EN": "Project N°3 - Make a web page dynamic with CSS animations.",
+         "JP": ""
+      },
+
+      "createdAt": {
+         "FR": "Mars 2021",
+         "EN": "March 2021",
+         "JP": "2021年 3月"
+      },
+
+      "isGolden": false
    },
 
    {
       "id": "4",
       "href": "https://seraphingithub.github.io/FatetSeraphin_4_12042021/",
-      "title": "La Chouette -OpenClassrooms",
-      "description": "Projet N°4 - Optimisation d'un site web existant.",
-      "skills": ["HTML / CSS", "JS", "SEO", "Accessibilité"],
       "imageUrl": "./images/LaChouette.jpg",
-      "createdAt": "Avril 2021"
+      "skills": ["HTML / CSS", "JavaScript", "SEO", "Accessibilité"],
+
+      "title": {
+         "FR": "La Chouette -OpenClassrooms",
+         "EN": "The Owl Agency -OpenClassrooms",
+         "JP": ""
+      },
+
+      "description": {
+         "FR": "Projet N°4 - Optimisation SEO d'un site web existant.",
+         "EN": "Project N°4 - SEO Optimisation of an existing website.",
+         "JP": ""
+      },
+
+      "createdAt": {
+         "FR": "Avril 2021",
+         "EN": "April 2021",
+         "JP": "2021年 4月"
+      },
+
+      "isGolden": false
    },
 
    {
       "id": "5",
       "href": "https://seraphingithub.github.io/FatetSeraphin_5_02062021_Online",
-      "title": "Orinoco -OpenClassrooms",
-      "description": "Projet N°5 - Création d'un site E-commerce.",
-      "skills": ["HTML / CSS", "JS"],
       "imageUrl": "./images/Orinoco.jpg",
-      "createdAt": "Juin 2021"
+      "skills": ["HTML / CSS", "JavaScript"],
+
+      "title": {
+         "FR": "Orinoco -OpenClassrooms",
+         "EN": "Orinoco -OpenClassrooms",
+         "JP": ""
+      },
+
+      "description": {
+         "FR": "Projet N°5 - Création de la partie front-end d'un site E-commerce.",
+         "EN": "Project N°5 - Front-end development of an E-shop website.",
+         "JP": ""
+      },
+
+      "createdAt": {
+         "FR": "Juin 2021",
+         "EN": "June 2021",
+         "JP": "2021年 6月"
+      },
+
+      "isGolden": false
    },
 
    {
       "id": "6",
       "href": "https://www.youtube.com/watch?v=2B86xBcuW1s",
-      "title": "Groupomania -OpenClassrooms",
-      "description": "Projet N°7 - Création d'un réseau social d'entreprise en fullstack.",
-      "skills": ["JS", "Vue", "Node", "Express", "MySQL", "Sequelize ORM", "SQL"],
       "imageUrl": "./images/Groupomania.jpg",
-      "createdAt": "Juillet 2021"
+      "skills": ["JavaScript", "Vue.js", "Node.js", "Express", "MySQL", "Sequelize ORM", "SQL"],
+
+      "title": {
+         "FR": "Groupomania -OpenClassrooms",
+         "EN": "Groupomania -OpenClassrooms",
+         "JP": ""
+      },
+
+      "description": {
+         "FR": "Projet N°7 - Création d'un réseau social d'entreprise en version fullstack avec toutes les technologies associées.",
+         "EN": "Project N°7 - Development of an enterprise social network in fullstack version with all related technologies.",
+         "JP": ""
+      },
+
+      "createdAt": {
+         "FR": "Juillet 2021",
+         "EN": "July 2021",
+         "JP": "2021年 7月"
+      },
+
+      "isGolden": false
    },
 
    {
       "id": "7",
       "href": "https://github.com/SeraphinGitHub/Social-Network---PHP",
-      "title": "Social Network -ENI",
-      "description": "Projet avec ENI école informatique - Création d'un réseau social en environnement PHP en fullstack. (non déployé - lien GitHub)",
-      "skills": ["PHP", "Twigg", "Composer", "MySQL", "SQL"],
       "imageUrl": "./images/Social-Network-PHP.jpg",
-      "createdAt": "Décembre 2021"
+      "skills": ["PHP", "Twigg", "Composer", "MySQL", "SQL"],
+
+      "title": {
+         "FR": "Réseau Social -ENI",
+         "EN": "Social Network -ENI",
+         "JP": ""
+      },
+
+      "description": {
+         "FR": "Projet avec ENI école informatique - Création d'un réseau social en environnement PHP fullstack. (non déployé - lien GitHub)",
+         "EN": "Project with Nantes computing school - Development of a social network with PHP environment fullstack. (not deployed - GitHub link)",
+         "JP": ""
+      },
+
+      "createdAt": {
+         "FR": "Décembre 2021",
+         "EN": "December 2021",
+         "JP": "2021年 12月"
+      },
+
+      "isGolden": false
    },
 
    {
       "id": "8",
       "href": "https://heroic-adventure.onrender.com/",
-      "title": "Heroic Adventure -MMORPG",
-      "description": "Web app, flash-game multijoueurs en temps réel, encore en développement. (Projet personnel)",
-      "skills": ["HTML / CSS", "JS", "Node", "Express", "Socket.io"],
       "imageUrl": "./images/Heroic-Adventure.jpg",
-      "createdAt": "Février 2022"
+      "skills": ["HTML / CSS", "JavaScript", "Node.js", "Express", "Socket.io"],
+
+      "title": {
+         "FR": "Heroic Adventure -MMORPG",
+         "EN": "Heroic Adventure -MMORPG",
+         "JP": ""
+      },
+
+      "description": {
+         "FR": "Web app, flash-game multijoueurs en temps réel, (Projet personnel). Encore en développement. =======> Attendre ~20s: serveur en veille <=======",
+         "EN": "Web app, real-time multiplayers flash-game, (Personal project). Still under development. =======> Wait ~20s: server in standby <=======",
+         "JP": ""
+      },
+
+      "createdAt": {
+         "FR": "Février 2022",
+         "EN": "February 2022",
+         "JP": "2022年 2月"
+      },
+
+      "isGolden": true
    },
 
    {
       "id": "9",
       "href": "https://github.com/SeraphinGitHub/Sword-Battle--Client/commits/master",
-      "title": "Sword Battle -App Android",
-      "description": "App android multijoueurs en temps réel, lien GitHub. (Projet personnel)",
-      "skills": ["C#", "Unity Engine", "JS", "Node", "Express", "Socket.io"],
       "imageUrl": "./images/Sword-Battle.jpg",
-      "createdAt": "Juillet 2022"
+      "skills": ["C#", "Unity Engine", "JavaScript", "Node.js", "Express", "Socket.io"],
+
+      "title": {
+         "FR": "Sword Battle -App Android",
+         "EN": "Sword Battle -Android App",
+         "JP": ""
+      },
+
+      "description": {
+         "FR": "App android multijoueurs en temps réel, lien GitHub. (Projet personnel)",
+         "EN": "Real-time multiplayers android app, GitHub link. (Personnal project)",
+         "JP": ""
+      },
+
+      "createdAt": {
+         "FR": "Juillet 2022",
+         "EN": "July 2022",
+         "JP": "2022年 7月"
+      },
+
+      "isGolden": false
    },
 
    {
       "id": "10",
       "href": "https://sf-astar-pathfinding.netlify.app/",
-      "title": "A* Pathfinder algorithm -Démo",
-      "description": "Démo d'algorithme de trouveur de chemin. (Projet personnel)",
-      "skills": ["HTML / CSS", "JS"],
       "imageUrl": "./images/Astar-Pathfinder.jpg",
-      "createdAt": "Sept 2022"
+      "skills": ["HTML / CSS", "JavaScript"],
+
+      "title": {
+         "FR": "A* Pathfinder algorithme -Démo",
+         "EN": "A* Pathfinding algorithm -Demo",
+         "JP": ""
+      },
+
+      "description": {
+         "FR": "Démo d'algorithme de trouveur de chemin. (Projet personnel)",
+         "EN": "Pathfinding algorithm demo. (Personnal project)",
+         "JP": ""
+      },
+
+      "createdAt": {
+         "FR": "Sept 2022",
+         "EN": "Sept 2022",
+         "JP": "2023年 9月"
+      },
+
+      "isGolden": false
    },
 
    {
       "id": "11",
       "href": "https://sf-map-editor.netlify.app/",
-      "title": "2D Map Editor -Stade: M.V.P.",
-      "description": "Créateur de carte pour jeux en 2D, basé sur système de ''tuile'', encore en développement.. (Projet personnel)",
-      "skills": ["Vue", "TS"],
       "imageUrl": "./images/2D-map-editor.jpg",
-      "createdAt": "Février 2023"
+      "skills": ["Vue.js", "TypeScript"],
+
+      "title": {
+         "FR": "Éditeur de carte 2D - M.V.P.",
+         "EN": "2D Map Editor - M.V.P. stage",
+         "JP": ""
+      },
+
+      "description": {
+         "FR": "Outil facilitant la création de cartes pour jeux en 2D, basé sur système de ''tuiles'', encore en développement. (Projet personnel)",
+         "EN": "Tool facilitating maps creation for 2D games, based on a ''tiles'' system, still under development. (Personnal project)",
+         "JP": ""
+      },
+
+      "createdAt": {
+         "FR": "Février 2023",
+         "EN": "February 2023",
+         "JP": "2023年 2月"
+      },
+
+      "isGolden": false
    }
 ]

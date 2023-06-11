@@ -1,19 +1,19 @@
 <template>
-    <div class="vue">
+   <div class="vue">
 
-    </div>
+   </div>
 </template>
 
 
 <script>
-    export default {
-        name: "Default",
-    }
+   export default {
+      name: "Default",
+   }
 </script>
 
 
 <style scoped>
-    .vue {
-        background-color: darkviolet;
-    }
+   .vue {
+      background-color: darkviolet;
+   }
 </style>

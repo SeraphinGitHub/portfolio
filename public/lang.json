@@ -1,0 +1,26 @@
+
+{
+   "creation": {
+      "FR": "Création",
+      "EN": "Creation",
+      "JP": "創造"
+   },
+
+   "description": {
+      "FR": "Description",
+      "EN": "Description",
+      "JP": "説明"
+   },
+
+   "technologies": {
+      "FR": "Technologies",
+      "EN": "Technologies",
+      "JP": "テクノロジー"
+   },
+
+   "openLink": {
+      "FR": "Ouvrir le lien",
+      "EN": "Open link",
+      "JP": "リンクを開く"
+   }
+}

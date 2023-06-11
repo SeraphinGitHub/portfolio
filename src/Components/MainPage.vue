@@ -2,6 +2,10 @@
    <section class="flexCenter main">
 
       <div class="background"/>
+      
+      <LangBar class="lang-bar"
+         @changeLang="updateLang"
+      />
 
       <SpaceParticules class="constellation"/>
       
@@ -19,11 +23,18 @@
       </div>
 
       <ul :key="project" class="flexCenter flow">
-            
-         <Project v-for="project in projects" :key="project.id"
-            :project="project"
+         
+         <Project v-for="project in projects"
+            :ref          ="`${project.id}`"
+            :key          ="project.id"
+            :project      ="project"
+            :langPack     ="langPack"
+            :selectedLang ="selectedLang"
+            @toggleProject="projectsDisplay"
          />
+
       </ul>
+
    </section>
 </template>
 
@@ -31,6 +42,7 @@
 <script>
    import Project         from "./Project.vue"
    import Spin            from "./Spin.vue"
+   import LangBar         from "./LangBar.vue"
    import SpaceParticules from "./SpaceParticules.vue"
 
    export default {
@@ -39,17 +51,21 @@
       components: {
          Project,
          Spin,
+         LangBar,
          SpaceParticules,
       },
 
       data() {
-         return {
-            project: {},
-            projects: {},
-         }
-      },
+      return {
+         project: {},
+         projects: {},
+         langPack: {},
+         selectedLang: "FR",
+      }},
 
       beforeMount() {
+         this.wakeUp_HeroicAdv();
+         this.getLangPack();
          this.getProjects();
       },
 
@@ -106,17 +122,47 @@
       },
 
       methods: {
+         async wakeUp_HeroicAdv () {
+
+            await fetch("https://heroic-adventure.onrender.com/wake")
+            .then(response => { return response.json()})
+            .then(data => console.log(data) )
+         },
+
          async getProjects() {
             const response = await fetch("./projects.json")
             .then(data => { return data.json() });
             this.projects = response.sort().reverse();
          },
+
+         async getLangPack() {
+            this.langPack = await fetch("./lang.json")
+            .then(data => { return data.json() });
+         },
+
+         projectsDisplay(projectID) {
+            Object.values(this.projects).forEach(project => {
+
+               const projectComponent = this.$refs[`${project.id}`][0];
+               if(projectID === project.id || !projectComponent.isOpen) return;
+               this.$refs[`${project.id}`][0].toggle();
+            });
+         },
+
+         updateLang(lang) {
+            this.selectedLang = lang;
+         },
+
       },
    }
 </script>
 
 
 <style scoped lang="scss">
+   
+   .lang-bar {
+
+   }
 
    .main {
       position: fixed;

@@ -9,11 +9,9 @@
       "preview": "vite preview"
    },
    "dependencies": {
-      "sass-loader": "^13.3.1",
-      "vue": "^3.2.47",
-      "css-loader": "^6.2.0",
-      "node-sass": "^6.0.1",
-      "style-loader": "^3.2.1"
+      "@fortawesome/fontawesome-free": "^6.4.0",
+      "node": "^20.2.0",
+      "vue": "^3.2.47"
    },
    "devDependencies": {
       "@vitejs/plugin-vue": "^4.1.0",

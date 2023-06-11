@@ -17,7 +17,7 @@ export class StarClass {
    
    veloSpecs:  INumber = {
       range:  1.5,
-      margin: 0.4,
+      margin: 0.5,
    }
 
    size:     number = this.randValue(10, 30);

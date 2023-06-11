@@ -5,7 +5,6 @@ import {
 
 import {
    StarClass,
-   LinkClass,
    CellClass,
 } from "./_export"
 
@@ -19,13 +18,13 @@ export class ConstellationClass {
    
    width:   number;
    height:  number;
-   density: number = 200;
-   maxDist: number = 100;
+   density: number = 250;
+   maxDist: number = 110;
    frame:   number = 0;
    
    starsArray: StarClass[] = [];
    cellsArray: CellClass[] = [];
-   linksArray: LinkClass[] = [];
+   linksArray: unknown[]   = [];
 
    constructor(
       canvas:  HTMLCanvasElement,
@@ -75,7 +74,7 @@ export class ConstellationClass {
       ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.frame++;
 
-      if(this.frame % 3 === 0 ) {
+      if(this.frame % 2 === 0 ) {
 
          this.frame      = 0;
          this.linksArray = [];
@@ -83,17 +82,21 @@ export class ConstellationClass {
          // this.cellsArray.forEach(cell => cell.setStarList(this.linksArray, this.starsArray)); 
       }
          
-      this.linksArray.forEach(link => link.draw(ctx));
+      this.linksArray.forEach(link => this.drawLink(ctx, link));
       this.starsArray.forEach(star => star.update(ctx));
       // this.cellsArray.forEach(cell => cell.draw(ctx));
    }
    
    connectStars() {
 
+      const maxDist:     number      = this.maxDist;
       const starsArray:  StarClass[] = this.starsArray;
       const starsLength: number      = starsArray.length;
 
-      for(let i = 0; i < starsLength; i++) {
+      for(let i = 0; i < starsLength -1; i++) {
+         
+         if(i % 3 !== 0) continue;
+         
          for(let k = i+1; k < starsLength; k++) {
 
             const { x: firstX,  y: firstY  }: Iposition = starsArray[i].position; // First  Star
@@ -103,15 +106,35 @@ export class ConstellationClass {
             const distY:    number = firstY -secondY;
             const starDist: number = Math.hypot(distX, distY);
 
-            if(starDist >= this.maxDist) continue;
+            if(starDist >= maxDist) continue;
 
-            const startPos: any    = { x: firstX,  y: firstY  };
-            const endPos:   any    = { x: secondX, y: secondY };
-            const opacity:  number = Math.floor((1 - (starDist / this.maxDist)) *10) /10;
+            const startPos: Iposition = { x: firstX,  y: firstY  };
+            const endPos:   Iposition = { x: secondX, y: secondY };
+            const opacity:  number    = Math.floor((1 - (starDist / maxDist)) *10) /10;
 
-            this.linksArray.push( new LinkClass(startPos, endPos, opacity) );
+            this.linksArray.push({ startPos, endPos, opacity });
          }
       }
+   }
+
+   drawLink(
+      ctx:  CanvasRenderingContext2D,
+      link: any,
+   ) {
+
+      const { startPos, endPos, opacity }: any  = link;
+      const { x: startX, y: startY }: Iposition = startPos;
+      const { x: endX,   y: endY   }: Iposition = endPos;
+
+      ctx.save();
+      ctx.globalAlpha = opacity;
+
+      ctx.beginPath();
+      ctx.moveTo( startX, startY );
+      ctx.lineTo( endX,   endY   );
+      ctx.stroke();
+
+      ctx.restore();
    }
 
 }
