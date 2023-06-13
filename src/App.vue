@@ -47,7 +47,7 @@
       font-family: "Roboto-Medium";
       line-height: 100%;
       font-weight: 600;
-      font-size: 120%;
+      font-size: 110%;
    }
 
    p, li {

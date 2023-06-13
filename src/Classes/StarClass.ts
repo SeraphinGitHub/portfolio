@@ -20,7 +20,7 @@ export class StarClass {
       margin: 0.5,
    }
 
-   size:     number = this.randValue(10, 30);
+   size:     number = this.randValue(8, 32);
    halfSize: number = this.size *0.5;
    imgSize:  number = 53; // 53 x 53 px
 

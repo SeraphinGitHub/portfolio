@@ -9,7 +9,10 @@
         </figure>
         
         <div class="flexCenter project-caption">
-            <h2>{{ project.title[selectedLang] }}</h2>
+            <div class="flexCenter title">
+                <h2>{{ project.title[selectedLang][0] }}</h2>
+                <h2>{{ project.title[selectedLang][1] }}</h2>
+            </div>
 
             <span class="flexCenter created-at">
                 <h3>{{ langPack.creation[selectedLang] }} :</h3>
@@ -140,7 +143,7 @@
     $btnTranslate: 120%;
 
     /* ******************************* Gold Frame ******************************* */
-    $size: 20px;
+    $size: 15px;
     $color: yellow;
 
     .gold-frame {
@@ -230,10 +233,15 @@
 
     $marginTopBase: 5px;
 
-    .project-caption h2 {
+    .title {
+        justify-content: flex-start;
+        width: $titleWidth;
         margin-top: 15px;
         margin-bottom: 10px;
-        width: $titleWidth;
+    }
+
+    .title h2 {
+        margin-right: 7px;
     }
 
     .created-at {

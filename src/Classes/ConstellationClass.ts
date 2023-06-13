@@ -18,8 +18,8 @@ export class ConstellationClass {
    
    width:   number;
    height:  number;
-   density: number = 250;
-   maxDist: number = 110;
+   density: number = 300;
+   maxDist: number = 120;
    frame:   number = 0;
    
    starsArray: StarClass[] = [];
@@ -74,20 +74,21 @@ export class ConstellationClass {
       ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.frame++;
 
-      if(this.frame % 2 === 0 ) {
-
+      if(this.frame % 7 === 0) {
          this.frame      = 0;
          this.linksArray = [];
-         this.connectStars();
-         // this.cellsArray.forEach(cell => cell.setStarList(this.linksArray, this.starsArray)); 
+         this.starsConnect();
+      }
+
+      else if(this.frame % 2 === 0) {
+         this.starsReconnect();
       }
          
       this.linksArray.forEach(link => this.drawLink(ctx, link));
       this.starsArray.forEach(star => star.update(ctx));
-      // this.cellsArray.forEach(cell => cell.draw(ctx));
    }
    
-   connectStars() {
+   starsConnect() {
 
       const maxDist:     number      = this.maxDist;
       const starsArray:  StarClass[] = this.starsArray;
@@ -112,9 +113,30 @@ export class ConstellationClass {
             const endPos:   Iposition = { x: secondX, y: secondY };
             const opacity:  number    = Math.floor((1 - (starDist / maxDist)) *10) /10;
 
-            this.linksArray.push({ startPos, endPos, opacity });
+            const linkData = {
+               id: `${i}-${k}`,
+               startPos,
+               endPos,
+               opacity,
+            };
+
+            this.linksArray.push(linkData);
          }
       }
+   }
+
+   starsReconnect() {
+
+      const starsArray:  StarClass[] = this.starsArray;
+
+      this.linksArray.forEach((link: any) => {
+         const splitedID: number[] = link.id.split("-");
+         const i: number = splitedID[0];
+         const k: number = splitedID[1];
+
+         link.startPos = starsArray[i].position; // First  Star
+         link.endPos   = starsArray[k].position; // Second Star
+      });
    }
 
    drawLink(

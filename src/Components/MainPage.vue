@@ -159,10 +159,6 @@
 
 
 <style scoped lang="scss">
-   
-   .lang-bar {
-
-   }
 
    .main {
       position: fixed;
