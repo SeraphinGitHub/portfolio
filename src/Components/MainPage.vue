@@ -22,15 +22,15 @@
          <div class="top"/>
       </div>
 
-      <ul :key="project" class="flexCenter flow">
+      <ul class="flexCenter flow">
          
-         <Project v-for="project in projects"
-            :ref          ="`${project.id}`"
+         <Project v-for="project in projectsList" ref="projElemRef"
+            :id           ="project.id"
             :key          ="project.id"
             :project      ="project"
             :langPack     ="langPack"
             :selectedLang ="selectedLang"
-            @toggleProject="projectsDisplay"
+            @closeOthers  ="closeOtherProject"
          />
 
       </ul>
@@ -57,14 +57,17 @@
 
       data() {
       return {
-         project: {},
-         projects: {},
-         langPack: {},
+         projectsList: [],
+         langPack:     {},
          selectedLang: "FR",
+         projectToWake: [
+            "https://heroic-adventure.onrender.com/wake",
+            "https://bf-manager.onrender.com/wake",
+         ]
       }},
 
       beforeMount() {
-         this.wakeUp_HeroicAdv();
+         this.wakeUpProjects();
          this.getLangPack();
          this.getProjects();
       },
@@ -122,31 +125,46 @@
       },
 
       methods: {
-         async wakeUp_HeroicAdv () {
 
-            await fetch("https://heroic-adventure.onrender.com/wake")
-            .then(response => { return response.json()})
-            .then(data => console.log(data) )
+         closeOtherProject(projectID) {
+            const projectRef = this.$refs.projElemRef;
+
+            for(let i = 0; i < projectRef.length; i++) {
+               const project = projectRef[i];
+               
+               if(project.isOpen && i !== projectID) project.closeProject();
+            }
+         },
+
+         async wakeUpProjects () {
+
+            this.projectToWake.forEach(async (projectURL) => {
+
+               await fetch(projectURL)
+               .then( response => { return response.json() })
+               .then( data     => { console.log(data)      })
+               .catch(error    => { console.log(error)     });
+            });
          },
 
          async getProjects() {
             const response = await fetch("./projects.json")
             .then(data => { return data.json() });
-            this.projects = response.sort().reverse();
+            
+            let projectsList = response.sort().reverse();
+            let id = 0;
+
+            projectsList.forEach((project) => {
+               project["id"] = id;
+               id++;
+            });
+
+            this.projectsList = projectsList;
          },
 
          async getLangPack() {
             this.langPack = await fetch("./lang.json")
             .then(data => { return data.json() });
-         },
-
-         projectsDisplay(projectID) {
-            Object.values(this.projects).forEach(project => {
-
-               const projectComponent = this.$refs[`${project.id}`][0];
-               if(projectID === project.id || !projectComponent.isOpen) return;
-               this.$refs[`${project.id}`][0].toggle();
-            });
          },
 
          updateLang(lang) {

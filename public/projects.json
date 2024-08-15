@@ -1,6 +1,5 @@
 [
    {
-      "id": "1",
       "href": "https://tokatchi-conception.netlify.app/",
       "skills": ["HTML / CSS"],
       "imageUrl": "./images/TokatchiConception.jpg",
@@ -27,7 +26,6 @@
    },
 
    {
-      "id": "2",
       "href": "https://seraphingithub.github.io/FatetSeraphin_2_03012021/",
       "skills": ["HTML / CSS"],
       "imageUrl": "./images/Reservia.jpg",
@@ -54,7 +52,6 @@
    },
 
    {
-      "id": "3",
       "href": "https://seraphingithub.github.io/FatetSeraphin_3_01032021/",
       "imageUrl": "./images/OhMyFood.jpg",
       "skills": ["HTML / CSS", "SASS"],
@@ -81,7 +78,6 @@
    },
 
    {
-      "id": "4",
       "href": "https://seraphingithub.github.io/FatetSeraphin_4_12042021/",
       "imageUrl": "./images/LaChouette.jpg",
       "skills": ["HTML / CSS", "JavaScript", "SEO", "Accessibilité"],
@@ -108,7 +104,6 @@
    },
 
    {
-      "id": "5",
       "href": "https://seraphingithub.github.io/FatetSeraphin_5_02062021_Online",
       "imageUrl": "./images/Orinoco.jpg",
       "skills": ["HTML / CSS", "JavaScript"],
@@ -131,11 +126,10 @@
          "JP": "2021年 6月"
       },
 
-      "isGolden": false
+      "isGolden": true
    },
 
    {
-      "id": "6",
       "href": "https://www.youtube.com/watch?v=2B86xBcuW1s",
       "imageUrl": "./images/Groupomania.jpg",
       "skills": ["JavaScript", "Vue.js", "Node.js", "Express", "MySQL", "Sequelize ORM", "SQL"],
@@ -162,7 +156,6 @@
    },
 
    {
-      "id": "7",
       "href": "https://github.com/SeraphinGitHub/Social-Network---PHP",
       "imageUrl": "./images/Social-Network-PHP.jpg",
       "skills": ["PHP", "Twigg", "Composer", "MySQL", "SQL"],
@@ -189,7 +182,6 @@
    },
 
    {
-      "id": "8",
       "href": "https://heroic-adventure.onrender.com/",
       "imageUrl": "./images/Heroic-Adventure.jpg",
       "skills": ["HTML / CSS", "JavaScript", "Node.js", "Express", "Socket.io"],
@@ -203,7 +195,7 @@
       "description": {
          "FR": "Web app, flash-game multijoueurs en temps réel, (Projet personnel). Encore en développement. =======> Attendre ~5s: serveur en veille <=======",
          "EN": "Web app, real-time multiplayers flash-game, (Personal project). Still under development. =======> Wait ~5s: server in standby <=======",
-         "JP": "Web アプリ、リアルタイム マルチプレイヤー フラッシュ ゲーム MMORPG (個人プロジェクト)。 まだ開発中です。 =======> 5 秒ほど待ちます: サーバーはスリープ中です <======="
+         "JP": "ウェブアプリ、リアルタイム マルチプレイヤー フラッシュ ゲーム MMORPG (個人プロジェクト)。 まだ開発中です。 =======> 5 秒ほど待ちます: サーバーはスリープ中です <======="
       },
 
       "createdAt": {
@@ -216,7 +208,32 @@
    },
 
    {
-      "id": "9",
+      "href": "https://bf-manager.onrender.com/",
+      "imageUrl": "./images/BF_Manager.jpg",
+      "skills": ["HTML / CSS", "JavaScript", "Node.js", "Express", "Socket.io", "PostgreSQL"],
+
+      "title": {
+         "FR": ["BF Manager",        "Web app"],
+         "EN": ["Soccer Manager",    "Web app"],
+         "JP": ["サッカーマネージャー", "ウェブアプリ"]
+      },
+
+      "description": {
+         "FR": "Web app, petit projet entrainement avec PostgreSQL",
+         "EN": "Web app, small training project with PostgreSQL",
+         "JP": "ウェブアプリ, PostgreSQL を使った小規模なトレーニング プロジェクト"
+      },
+
+      "createdAt": {
+         "FR": "Mai 2022",
+         "EN": "May 2022",
+         "JP": "2022年 5月"
+      },
+
+      "isGolden": false
+   },
+
+   {
       "href": "https://github.com/SeraphinGitHub/Sword-Battle--Client/commits/master",
       "imageUrl": "./images/Sword-Battle.jpg",
       "skills": ["C#", "Unity Engine", "JavaScript", "Node.js", "Express", "Socket.io"],
@@ -243,7 +260,6 @@
    },
 
    {
-      "id": "10",
       "href": "https://sf-astar-pathfinding.netlify.app/",
       "imageUrl": "./images/Astar-Pathfinder.jpg",
       "skills": ["HTML / CSS", "JavaScript"],
@@ -270,7 +286,6 @@
    },
 
    {
-      "id": "11",
       "href": "https://sf-map-editor.netlify.app/",
       "imageUrl": "./images/2D-map-editor.jpg",
       "skills": ["Vue.js", "TypeScript"],
@@ -294,5 +309,31 @@
       },
 
       "isGolden": false
+   },
+
+   {
+      "href": "https://empire-rising.netlify.app/",
+      "imageUrl": "./images/Empire-Rising.jpg",
+      "skills": ["Vue.js", "TypeScript", "Node.js", "Express", "Socket.io"],
+
+      "title": {
+         "FR": ["Empire Rising", "RTS 2D"],
+         "EN": ["Empire Rising", "2D RTS"],
+         "JP": ["エンパヤ ライジング", "2D RTS"]
+      },
+
+      "description": {
+         "FR": "Jeux de stratégie multijoueurs en temps réel, encore en développement. (Projet personnel)",
+         "EN": "Real time strategy multiplayer game, still under development. (Personnal project)",
+         "JP": "リアルタイム戦略マルチプレイヤーゲーム、まだ開発中です。 (個人プロジェクト)"
+      },
+
+      "createdAt": {
+         "FR": "Octobre 2022",
+         "EN": "October 2022",
+         "JP": "2022年 10月"
+      },
+
+      "isGolden": true
    }
 ]

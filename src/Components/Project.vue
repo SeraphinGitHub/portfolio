@@ -1,9 +1,9 @@
 <template>
-    <li class="flexCenter project-frame bgd-1" :id="project.id">
+    <li class="flexCenter project-frame bgd-1" ref="projectRef">
 
         <div class="gold-frame"/>
 
-        <figure class="flexCenter fig" @click="setToggle()">
+        <figure class="flexCenter fig" @click="toggleProject()">
             <img :src="project.imageUrl" alt="photo du site web">
             <div class="flexCenter white-filter"></div>
         </figure>
@@ -21,7 +21,7 @@
             
             <span class="flexCenter description">
                 <h3>{{ langPack.description[selectedLang] }} :</h3>
-                <p> {{ project .description[selectedLang] }}</p>
+                <p> {{ project.description [selectedLang] }}</p>
             </span>
             
             <div v-show="project.skills" class="flexCenter skills">
@@ -46,16 +46,16 @@
         name: "Project",
 
         props: {
-            project: Object,
-            langPack: Object,
+            project:      Object,
+            langPack:     Object,
             selectedLang: String,
         },
 
         data() {
         return {
-            skills: "",
-            isOpen: false,
-            isPulsing: false,
+            skills:     "",
+            isOpen:     false,
+            projectDOM: {},
         }},
 
         beforeMount() {
@@ -63,66 +63,80 @@
         },
 
         mounted() {
-            const project   = document.getElementById(this.project.id);
-            const goldFrame = project.querySelector(".gold-frame");
-
-            if(this.project.id % 2 === 0) {
-                project.classList.remove("bgd-1");
-                project.classList.add("bgd-2");
-            }
-
-            if(this.project.isGolden) goldFrame.classList.add("show-gold");
+            this.init();
         },
 
         methods: {
-            setToggle() {
-                this.toggle();
-                this.$emit("toggleProject", this.project.id);
-            },
 
-            toggle() {
-                const project = document.getElementById(this.project.id);
-                const figure  = project.querySelector(".fig");
-                const caption = project.querySelector(".project-caption");
-                const btn     = project.querySelector(".switch-to-btn");
-                const filter  = project.querySelector(".white-filter");
+            init() {
+                const projectRef = this.$refs.projectRef;
+                const goldFrame  = projectRef.querySelector(".gold-frame");
+
+                this.projectDOM = {
+                    project: projectRef,
+                    figure:  projectRef.querySelector(".fig"),
+                    caption: projectRef.querySelector(".project-caption"),
+                    btn:     projectRef.querySelector(".switch-to-btn"),
+                    filter:  projectRef.querySelector(".white-filter"),
+                }
+
+                if(this.project.id % 2 === 0) {
+                    projectRef.classList.add("bgd-2");
+                    projectRef.classList.remove("bgd-1");
+                }
+
+                if(this.project.isGolden) goldFrame.classList.add("show-gold");
+            },
+            
+            toggleProject() {
 
                 if(!this.isOpen) {
+                    this.openProject();
+                    this.$emit("closeOthers", this.project.id);
+                }
+                else this.closeProject();
+            },
+
+            openProject() {
+
+                this.isOpen = true;
+                const { project, figure, caption, btn, filter } = this.projectDOM;
+
+                project.classList.remove("close-project");
+                figure.classList.remove("close-fig");
+                caption.classList.remove("close-caption");
+                btn.classList.remove("close-btn");
+
+                project.classList.add("open-project");
+                figure.classList.add("open-fig");
+                caption.classList.add("open-caption");
+                btn.classList.add("open-btn");
+
+                filter.style = "display: none";
+            },
+
+            closeProject() {
+
+                this.isOpen = false;
+                const { project, figure, caption, btn, filter } = this.projectDOM;
+
+                project.classList.remove("open-project");
+                figure.classList.remove("open-fig");
+                caption.classList.remove("open-caption");
+                btn.classList.remove("open-btn");
+
+                project.classList.add("close-project");
+                figure.classList.add("close-fig");
+                caption.classList.add("close-caption");
+                btn.classList.add("close-btn");
+
+                setTimeout(() => {
+                    filter.style = "display: flex";
                     project.classList.remove("close-project");
                     figure.classList.remove("close-fig");
                     caption.classList.remove("close-caption");
                     btn.classList.remove("close-btn");
-
-                    project.classList.add("open-project");
-                    figure.classList.add("open-fig");
-                    caption.classList.add("open-caption");
-                    btn.classList.add("open-btn");
-
-                    filter.style = "display: none";
-                }
-                
-                else {
-                    project.classList.remove("open-project");
-                    figure.classList.remove("open-fig");
-                    caption.classList.remove("open-caption");
-                    btn.classList.remove("open-btn");
-
-                    project.classList.add("close-project");
-                    figure.classList.add("close-fig");
-                    caption.classList.add("close-caption");
-                    btn.classList.add("close-btn");
-
-                    setTimeout(() => {
-                        filter.style = "display: flex";
-                        project.classList.remove("close-project");
-                        figure.classList.remove("close-fig");
-                        caption.classList.remove("close-caption");
-                        btn.classList.remove("close-btn");
-                    }, 700);
-                }
-
-                this.isOpen    = !this.isOpen;
-                this.isPulsing = !this.isPulsing;
+                }, 700);  
             },
 
             goToPage() {
@@ -172,6 +186,7 @@
         height: $projectSize;
         width: $projectWidth;
         margin: 20px;
+        margin-top: 50px;
         margin-bottom: 0px;
         border-radius: $marginBase + 15px 0 $marginBase + 15px 0;
         border: 3px solid black;
