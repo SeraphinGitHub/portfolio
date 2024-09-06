@@ -23,15 +23,17 @@
       </div>
 
       <ul class="flexCenter flow">
-         
-         <Project v-for="project in projectsList" ref="projElemRef"
-            :id           ="project.id"
-            :key          ="project.id"
-            :project      ="project"
-            :langPack     ="langPack"
-            :selectedLang ="selectedLang"
-            @closeOthers  ="closeOtherProject"
-         />
+
+         <div class="flexCenter" v-for="row in projectsList" :key="row" ref="projDivRef">
+
+            <Project v-for="project in row" :key ="project.id" ref="projElemRef"
+               :id           ="project.id"
+               :project      ="project"
+               :langPack     ="langPack"
+               :selectedLang ="selectedLang"
+               @closeOthers  ="closeOtherProject"
+            />
+         </div>
 
       </ul>
 
@@ -58,18 +60,22 @@
       data() {
       return {
          projectsList: [],
+         responseList: [],
          langPack:     {},
          selectedLang: "FR",
          projectToWake: [
             "https://heroic-adventure.onrender.com/wake",
-            "https://bf-manager.onrender.com/wake",
+            // "https://bf-manager.onrender.com/wake",
          ]
       }},
 
-      beforeMount() {
-         this.wakeUpProjects();
-         this.getLangPack();
-         this.getProjects();
+      async mounted() {
+         
+         await this.wakeUpProjects();
+         await this.getLangPack();
+         await this.getProjects();
+
+         this.generateProjects();
       },
 
       computed: {
@@ -137,7 +143,7 @@
          },
 
          async wakeUpProjects () {
-
+            
             this.projectToWake.forEach(async (projectURL) => {
 
                await fetch(projectURL)
@@ -148,18 +154,10 @@
          },
 
          async getProjects() {
-            const response = await fetch("./projects.json")
+            this.responseList = await fetch("./projects.json")
             .then(data => { return data.json() });
             
-            let projectsList = response.sort().reverse();
-            let id = 0;
-
-            projectsList.forEach((project) => {
-               project["id"] = id;
-               id++;
-            });
-
-            this.projectsList = projectsList;
+            this.responseList.sort().reverse();
          },
 
          async getLangPack() {
@@ -171,12 +169,52 @@
             this.selectedLang = lang;
          },
 
+         generateProjects() {
+
+            let id    = 0;
+            let count = 0;
+            let isPair = false;
+
+            let tempsList    = [];
+            let projectsList = [];
+
+            this.responseList.forEach((project) => {
+               project["id"] = id;
+               id++;
+               count++;
+
+               tempsList.push(project);
+
+               if(count === 3 && !isPair
+               || count === 2 &&  isPair) {
+
+                  count  = 0;
+                  isPair = !isPair;
+                  projectsList.push(tempsList);
+                  tempsList = [];
+               }
+            });
+
+            if(tempsList.length > 0) projectsList.push(tempsList);
+
+            this.projectsList = projectsList;
+
+            this.$nextTick(() => {
+               const lastIndex = this.$refs.projDivRef.length -1;
+               if(tempsList.length === 2) this.$refs.projDivRef[lastIndex].classList.add("space-between");
+            });
+         },
+
       },
    }
 </script>
 
 
 <style scoped lang="scss">
+
+   .space-between {
+      justify-content: space-between;
+   }
 
    .main {
       position: fixed;
@@ -213,8 +251,7 @@
       overflow: auto;
       overflow-x: hidden;
       height: 98%;
-      width: 67%;
-      padding-right: 700px;
+      width: 50%;
    }
    
    .constellation {
@@ -268,6 +305,28 @@
          width: 100px;
          border-radius: 0 0 50px 50px;
          background-color: black;
+      }
+   }
+
+   @media screen and (min-width : 2600px) {
+      .flow {
+         width: 55%;
+      }
+   }
+
+   @media screen and (max-width : 2599px) {
+      .flow {
+         width: 75%;
+      }
+   }
+
+   @media screen and (max-width : 1599px) {
+      .flow {
+         width: 40%;
+      }
+
+      .space-between {
+         justify-content: center;
       }
    }
 

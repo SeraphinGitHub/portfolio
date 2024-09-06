@@ -167,9 +167,9 @@
       },
 
       "description": {
-         "FR": "Projet avec ENI école informatique - Création d'un réseau social en environnement PHP fullstack. (non déployé - lien GitHub)",
-         "EN": "Project with Nantes computing school - Development of a social network with PHP environment fullstack. (not deployed - GitHub link)",
-         "JP": "コンピュータースクールとのプロジェクト - Fullstack、PHP 環境でのSNSの作成。 (デプロイされていません - GitHub リンク)"
+         "FR": "Projet avec ENI école informatique - Création d'un réseau social en environnement PHP fullstack, lien GitHub. (non déployé - Apprendre PHP)",
+         "EN": "Project with Nantes computing school - Development of a social network with PHP environment fullstack, GitHub link. (not deployed - Learn PHP)",
+         "JP": "コンピュータースクールとのプロジェクト - Fullstack、PHP 環境でのSNSの作成, GitHub リンク。 (デプロイされていません - PHPを学ぶ)"
       },
 
       "createdAt": {
@@ -187,15 +187,15 @@
       "skills": ["HTML / CSS", "JavaScript", "Node.js", "Express", "Socket.io"],
 
       "title": {
-         "FR": ["Heroic Adventure", "-MMORPG"],
-         "EN": ["Heroic Adventure", "-MMORPG"],
+         "FR": ["Heroic Adventure", "-MMORPG (Démo)"],
+         "EN": ["Heroic Adventure", "-MMORPG (Demo)"],
          "JP": ["へロイック",         "アドベンチャー"]
       },
 
       "description": {
-         "FR": "Web app, flash-game multijoueurs en temps réel, (Projet personnel). Encore en développement. =======> Attendre ~5s: serveur en veille <=======",
-         "EN": "Web app, real-time multiplayers flash-game, (Personal project). Still under development. =======> Wait ~5s: server in standby <=======",
-         "JP": "ウェブアプリ、リアルタイム マルチプレイヤー フラッシュ ゲーム MMORPG (個人プロジェクト)。 まだ開発中です。 =======> 5 秒ほど待ちます: サーバーはスリープ中です <======="
+         "FR": "Démo de flash-game multijoueurs en temps réel. >>> Attendre quelques secondes, serveur en veille. (Projet personnel - Me familiariser avec Socket.io)",
+         "EN": "Real-time multiplayers flash-game demo. >>> Wait few seconds, server in standby. (Personal project - Learn Socket.io package)",
+         "JP": "リアルタイム マルチプレイヤー フラッシュ ゲームのデモ。>>> 数秒お待ちください。サーバーはスタンバイ状態です。(個人プロジェクト - Socket.io パッケージの学習)"
       },
 
       "createdAt": {
@@ -205,32 +205,6 @@
       },
 
       "isGolden": true
-   },
-
-   {
-      "href": "https://bf-manager.onrender.com/",
-      "imageUrl": "./images/BF_Manager.jpg",
-      "skills": ["HTML / CSS", "JavaScript", "Node.js", "Express", "Socket.io", "PostgreSQL"],
-
-      "title": {
-         "FR": ["BF Manager",        "Web app"],
-         "EN": ["Soccer Manager",    "Web app"],
-         "JP": ["サッカーマネージャー", "ウェブアプリ"]
-      },
-
-      "description": {
-         "FR": "Web app, petit projet entrainement avec PostgreSQL",
-         "EN": "Web app, small training project with PostgreSQL",
-         "JP": "ウェブアプリ, PostgreSQL を使った小規模なトレーニング プロジェクト"
-      },
-
-      "createdAt": {
-         "FR": "Mai 2022",
-         "EN": "May 2022",
-         "JP": "2022年 5月"
-      },
-
-      "isGolden": false
    },
 
    {
@@ -245,9 +219,9 @@
       },
 
       "description": {
-         "FR": "App android multijoueurs en temps réel, lien GitHub. (Projet personnel)",
-         "EN": "Real-time multiplayers android app, GitHub link. (Personnal project)",
-         "JP": "リアルタイム マルチプレイヤー Android アプリ、GitHub リンク。 (個人プロジェクト)"
+         "FR": "Application android de jeu d'arcade multijoueurs en temps réel, lien GitHub. (Projet personnel - Maintenir mes compétence en C# et Socket.io)",
+         "EN": "Android app, real-time multiplayer arcade game, GitHub link. (Personal project - Maintain my skills with C# and Socket.io)",
+         "JP": "Android アプリ、リアルタイム マルチプレイヤー アーケード ゲーム、GitHub リンク。(個人プロジェクト - C# と Socket.io のスキルを維持)"
       },
 
       "createdAt": {
@@ -265,15 +239,15 @@
       "skills": ["HTML / CSS", "JavaScript"],
 
       "title": {
-         "FR": ["A* Pathfinder",    "algorithme -Démo"],
-         "EN": ["A* Pathfinding",   "algorithm -Demo"],
+         "FR": ["A* Pathfinder",    "algorithme (Démo)"],
+         "EN": ["A* Pathfinding",   "algorithm (Demo)"],
          "JP": ["パスファインダー", "アルゴリズム"]
       },
 
       "description": {
-         "FR": "Démo d'algorithme de trouveur de chemin. (Projet personnel)",
-         "EN": "Pathfinding algorithm demo. (Personnal project)",
-         "JP": "パスファインダーアルゴリズムのデモンストレーション。 (個人プロジェクト)"
+         "FR": "Démo d'algorithme de trouveur de chemin. (Projet personnel - Améliorer mes connaissances en algorithmique)",
+         "EN": "Pathfinding algorithm demo. (Personnal project - Improve my knowledge of algorithms)",
+         "JP": "パスファインダーアルゴリズムのデモンストレーション。 (個人プロジェクト - アルゴリズムの知識を向上させる)"
       },
 
       "createdAt": {
@@ -291,15 +265,15 @@
       "skills": ["Vue.js", "TypeScript"],
 
       "title": {
-         "FR": ["Éditeur de carte 2D", "- M.V.P."],
-         "EN": ["2D Map Editor",       "- M.V.P. stage"],
-         "JP": ["2Dマップエディター",     "M.V.P. ステージ"]
+         "FR": ["Éditeur de carte 2D", "(M.V.P.)"],
+         "EN": ["2D Map Editor",       "(M.V.P. stage)"],
+         "JP": ["2Dマップエディター",     "(M.V.P. ステージ)"]
       },
 
       "description": {
-         "FR": "Outil facilitant la création de cartes pour jeux en 2D, basé sur système de ''tuiles'', encore en développement. (Projet personnel)",
-         "EN": "Tool facilitating maps creation for 2D games, based on a ''tiles'' system, still under development. (Personnal project)",
-         "JP": "タイルシステムに基づいた 2D ゲーム用のマップの作成を容易にするツールですが、まだ開発中です。 (個人プロジェクト)"
+         "FR": "(MVP) Outil de création de cartes pour jeux en 2D, basé sur système de ''tuiles''. (Projet personnel - Apprendre TypeScript.)",
+         "EN": "(MVP) Map creation tool for 2D games, based on a ''tile'' system. (Personal project - Learn TypeScript.)",
+         "JP": "(MVP) 「タイル」システムに基づいた 2D ゲーム用のマップ作成ツール。 (個人プロジェクト - TypeScript を学ぶ)"
       },
 
       "createdAt": {
@@ -323,9 +297,9 @@
       },
 
       "description": {
-         "FR": "Jeux de stratégie multijoueurs en temps réel, encore en développement. (Projet personnel)",
-         "EN": "Real time strategy multiplayer game, still under development. (Personnal project)",
-         "JP": "リアルタイム戦略マルチプレイヤーゲーム、まだ開発中です。 (個人プロジェクト)"
+         "FR": "Démo de jeu de stratégie multijoueurs en temps réel. (Projet personnel - Aprofondir mes connaissances en TypeScript)",
+         "EN": "Real time strategy multiplayer game demo. (Personnal project - Improve my knowledge with TypeScript)",
+         "JP": "リアルタイム戦略マルチプレイヤーゲームのデモ。(個人プロジェクト - TypeScript に関する知識の向上)"
       },
 
       "createdAt": {

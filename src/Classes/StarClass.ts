@@ -9,36 +9,55 @@ import {
 // =====================================================================
 export class StarClass {
 
-   constellation: any;
-   leftBorder: number;
+   id:          number;
+   constell:    any;
    
-   position:   Iposition = { x: 0, y: 0 };
-   velocity:   Iposition = { x: 0, y: 0 };
+   position:    Iposition = { x: 0, y: 0 };
+   velocity:    Iposition = { x: 0, y: 0 };
+   oldPosition: Iposition = { x: 0, y: 0 };
+   oldVelocity: Iposition = { x: 0, y: 0 };
    
-   veloSpecs:  INumber = {
+   imgSize:     number    = 53; // Image ==> 53 x 53 px
+   size:        number    = this.randValue(8, 32);
+   halfSize:    number    = this.size *0.5;
+   friction:    number    = 0.02;
+
+   isPosSaved:  boolean = false;
+   hasExplode:  boolean = false;
+   
+   veloSpecs:   INumber   = {
       range:  1.5,
       margin: 0.5,
    }
 
-   size:     number = this.randValue(8, 32);
-   halfSize: number = this.size *0.5;
-   imgSize:  number = 53; // 53 x 53 px
-
-   constructor(constellationSize: any) {
-      this.constellation = constellationSize;
-
-      this.leftBorder    = this.constellation.width *0.4;
-      // this.leftBorder    = this.halfSize;
+   constructor(
+      id:            number,
+      constellation: any,
+   ) {
+      this.id       = id;
+      this.constell = constellation;
 
       this.position = {
-         x: this.randValue(this.leftBorder, this.constellation.width  -this.size),
-         y: this.randValue(this.halfSize,   this.constellation.height -this.size),
+         x: this.randValue(this.constell.leftBorder, this.constell.width  -this.size),
+         y: this.randValue(this.halfSize,            this.constell.height -this.size),
       };
 
       this.velocity = {
          x: this.randVelocity(),
          y: this.randVelocity(),
       };
+   }
+
+   reset(
+      eventWidth:  number,
+      eventHeight: number,
+   ) {
+      this.constell.width      = eventWidth;
+      this.constell.height     = eventHeight;
+      this.constell.leftBorder = eventWidth *this.constell.emptyWidth;
+      
+      this.position.x = this.constell.leftBorder + Math.random() * (eventWidth  -this.size);
+      this.position.y = this.size                + Math.random() * (eventHeight -this.size);
    }
    
    randValue(
@@ -69,7 +88,7 @@ export class StarClass {
       const halfSize: number    = this.halfSize;
       const size:     number    = this.size;
 
-      ctx.drawImage(this.constellation.img,
+      ctx.drawImage(this.constell.img,
          0, 0, imgSize, imgSize,
 
          x -halfSize,
@@ -110,20 +129,59 @@ export class StarClass {
       ctx.restore();
    }
 
+   savePosition() {
+
+      if(this.isPosSaved) return;
+
+      this.oldPosition = {
+         x: this.position.x,
+         y: this.position.y,
+      };
+      
+      this.isPosSaved = true;
+   }
+
+   updateVelocity(
+      current: number,
+      old:     number,
+   ): number {
+
+      return Math.floor( (current +(current < old ?this.friction :-this.friction)) * 100) /100;
+   }
+
+   handleExplode() {
+
+      if(!this.hasExplode) return;
+
+      const friction: number = this.friction;
+      const { x: curVelo_X, y: curVelo_Y }: Iposition = this.velocity;
+      const { x: oldVelo_X, y: oldVelo_Y }: Iposition = this.oldVelocity;
+         
+      this.velocity.x = this.updateVelocity(curVelo_X, oldVelo_X);
+      this.velocity.y = this.updateVelocity(curVelo_Y, oldVelo_Y);
+
+      const isRange_X: boolean = (curVelo_X -friction < oldVelo_X) && (oldVelo_X < curVelo_X +friction);
+      const isRange_Y: boolean = (curVelo_Y -friction < oldVelo_Y) && (oldVelo_Y < curVelo_Y +friction);
+
+      if(isRange_X && isRange_Y) this.hasExplode = false;
+   }
+
    update(ctx: CanvasRenderingContext2D) {
+      
+      this.handleExplode();
 
       this.position.x += this.velocity.x;
       this.position.y += this.velocity.y;
 
       // Bounce X axis on collide bounderies
-      if(this.position.x > this.constellation.width  -this.halfSize
-      || this.position.x < this.leftBorder) {
+      if(this.position.x > this.constell.width -this.halfSize
+      || this.position.x < this.constell.leftBorder) {
 
          this.velocity.x *= -1;
       }
 
       // Bounce Y axis on collide bounderies
-      if(this.position.y > this.constellation.height -this.halfSize
+      if(this.position.y > this.constell.height -this.halfSize
       || this.position.y < this.halfSize) {
 
          this.velocity.y *= -1;

@@ -5,7 +5,6 @@ import {
 
 import {
    StarClass,
-   CellClass,
 } from "./_export"
 
 // =====================================================================
@@ -14,88 +13,105 @@ import {
 export class ConstellationClass {
 
    canvas: HTMLCanvasElement;
+   ctx:    CanvasRenderingContext2D;
    img:    HTMLImageElement;
    
-   width:   number;
-   height:  number;
-   density: number = 300;
-   maxDist: number = 120;
-   frame:   number = 0;
+   emptyWidth: number = 0.4; // 40% screen size
+
+   width:       number;
+   height:      number;
+   leftBorder:  number ;
+   density:     number = 400;
+   linkMaxDist: number = 100;
+   frame:       number = 0;
    
    starsArray: StarClass[] = [];
-   cellsArray: CellClass[] = [];
    linksArray: unknown[]   = [];
 
    constructor(
       canvas:  HTMLCanvasElement,
+      ctx:     CanvasRenderingContext2D,
       imgPath: string,
    ) {
-      this.canvas  = canvas;
-      this.img     = new Image();
-      this.img.src = imgPath;
-      this.width   = this.canvas.width;
-      this.height  = this.canvas.height;
+      this.canvas     = canvas;
+      this.ctx        = ctx;
+      this.img        = new Image();
+      this.img.src    = imgPath;
+      this.width      = this.canvas.width;
+      this.height     = this.canvas.height;
+      this.leftBorder = this.width *this.emptyWidth;
 
       this.init();
    }
 
    init() {
 
-      const constelSize: any = {
-         width:  this.width,
-         height: this.height,
-         img:    this.img,
+      const constellation: any = {
+         width:      this.width,
+         height:     this.height,
+         emptyWidth: this.emptyWidth,
+         leftBorder: this.leftBorder,
+         img:        this.img,
       }
 
       for (let i = 0; i < this.density; i++) {
-         this.starsArray.push( new StarClass(constelSize) );
-      }
-
-      this.createGrid();
-   }
-
-   createGrid() {
-      
-      const cols: number = 5;
-      const rows: number = 3;
-      const cellWidth:  number = window.innerWidth  /cols;
-      const cellHeight: number = window.innerHeight /rows;
-
-      for(let i = 0; i < cols; i++) {
-         for(let k = 0; k < rows; k++) {
-            
-            this.cellsArray.push( new CellClass(i, k, cellWidth, cellHeight, this.maxDist) );
-         }
+         this.starsArray.push( new StarClass(i, constellation) );
       }
    }
 
-   handleStars(ctx: CanvasRenderingContext2D) {
-         
-      ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      this.frame++;
+   resize(event: any) {
 
-      if(this.frame % 7 === 0) {
-         this.frame      = 0;
-         this.linksArray = [];
-         this.starsConnect();
-      }
+      const eventWidth  = event.target.window.innerWidth;
+      const eventHeight = event.target.window.innerHeight;
 
-      else if(this.frame % 2 === 0) {
-         this.starsReconnect();
-      }
-         
-      this.linksArray.forEach(link => this.drawLink(ctx, link));
-      this.starsArray.forEach(star => star.update(ctx));
+      this.width         = eventWidth;
+      this.height        = eventHeight;
+      this.canvas.width  = eventWidth;
+      this.canvas.height = eventHeight;
+
+      this.ctx.strokeStyle = "white";
+      this.ctx.lineWidth   = 2;
+
+      this.starsArray.forEach((star) => star.reset(eventWidth, eventHeight));
    }
-   
-   starsConnect() {
 
-      const maxDist:     number      = this.maxDist;
+   getCellID(position: Iposition) {
+
+      const cellX = Math.floor(position.x /this.linkMaxDist);
+      const cellY = Math.floor(position.y /this.linkMaxDist);
+
+      return {
+         cellX,
+         cellY,
+      };
+   }
+
+   getNeighborCells(position: Iposition) {
+
+      const { cellX, cellY } = this.getCellID(position);
+
+      return [
+         `${cellX   }-${cellY   }`, // current cell
+         `${cellX -1}-${cellY -1}`, // top-left
+         `${cellX   }-${cellY -1}`, // top
+         `${cellX +1}-${cellY -1}`, // top-right
+         `${cellX +1}-${cellY   }`, // right
+         `${cellX +1}-${cellY +1}`, // bottom-right
+         `${cellX   }-${cellY +1}`, // bottom
+         `${cellX -1}-${cellY +1}`, // bottom-left
+         `${cellX -1}-${cellY   }`, // left
+      ];
+   }
+
+   starsConnect_OLD() {
+
+      const maxDist:     number      = this.linkMaxDist;
       const starsArray:  StarClass[] = this.starsArray;
       const starsLength: number      = starsArray.length;
 
       for(let i = 0; i < starsLength -1; i++) {
          
+         // Create link every 3 stars
          if(i % 3 !== 0) continue;
          
          for(let k = i+1; k < starsLength; k++) {
@@ -125,6 +141,64 @@ export class ConstellationClass {
       }
    }
 
+   starsConnect() {
+
+      const gridMap = new Map<string, StarClass[]>();
+   
+      // Add each stars within the same cell to the grid
+      this.starsArray.forEach((star) => {
+         const { cellX, cellY } = this.getCellID(star.position);
+         const cellID = `${cellX}-${cellY}`;
+
+         if(!gridMap.has(cellID)) gridMap.set(cellID, []);
+         gridMap.get(cellID)!.push(star);
+      });
+
+
+      // Check distances between stars within same neighboring
+      // Set neighbors
+      this.starsArray.forEach((star) => {
+         const neighborsArrayID: string[] = this.getNeighborCells(star.position);
+   
+         // Create link every 3 stars
+         if(star.id % 3 !== 0) return;
+
+         // Get neighbor's cells
+         neighborsArrayID.forEach((cellID) => {
+            const neighborCells: StarClass[] | undefined = gridMap.get(cellID);
+
+            if(!neighborCells) return;
+            
+            // Get cell's stars
+            neighborCells.forEach((nebStar) => {
+
+               if(nebStar === star) return;
+
+               // Set star distance
+               const distX:    number = star.position.x -nebStar.position.x;
+               const distY:    number = star.position.y -nebStar.position.y;
+               const starDist: number = Math.hypot(distX, distY);
+
+               if(starDist >= this.linkMaxDist) return;
+
+               // Set link data
+               const startPos: Iposition = { x: star.position.x,    y: star.position.y    };
+               const endPos:   Iposition = { x: nebStar.position.x, y: nebStar.position.y };
+               const opacity:  number    = Math.floor((1 - (starDist /this.linkMaxDist)) * 10) / 10;
+
+               const linkData = {
+                  id: `${star.id}-${nebStar.id}`,
+                  startPos,
+                  endPos,
+                  opacity,
+               };
+
+               this.linksArray.push(linkData);
+            });
+         });
+      });
+   }
+
    starsReconnect() {
 
       const starsArray:  StarClass[] = this.starsArray;
@@ -139,24 +213,64 @@ export class ConstellationClass {
       });
    }
 
-   drawLink(
-      ctx:  CanvasRenderingContext2D,
-      link: any,
-   ) {
+   update() {
+         
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.frame++;
+      
+      // Connect stars every 7 frames
+      if(this.frame % 7 === 0) {
+         this.frame      = 0;
+         this.linksArray = [];
+         this.starsConnect();
+      }
+      
+      // Reconnect stars every 3 frames
+      else if(this.frame % 3 === 0) {
+         this.starsReconnect();
+      }
+         
+      
+      // this.starsArray.forEach(star => this.drawFrame(star));
+      this.linksArray.forEach(link => this.drawLink(link));
+      this.starsArray.forEach(star => star.update(this.ctx));
+   }
+
+   drawLink(link: any) {
 
       const { startPos, endPos, opacity }: any  = link;
       const { x: startX, y: startY }: Iposition = startPos;
       const { x: endX,   y: endY   }: Iposition = endPos;
 
-      ctx.save();
-      ctx.globalAlpha = opacity;
+      this.ctx.save();
+      this.ctx.globalAlpha = opacity;
 
-      ctx.beginPath();
-      ctx.moveTo( startX, startY );
-      ctx.lineTo( endX,   endY   );
-      ctx.stroke();
+      this.ctx.beginPath();
+      this.ctx.moveTo( startX, startY );
+      this.ctx.lineTo( endX,   endY   );
+      this.ctx.stroke();
 
-      ctx.restore();
+      this.ctx.restore();
+   }
+   
+   drawFrame(cell: StarClass) {
+
+      this.ctx.save();
+      this.ctx.lineWidth = 1;
+      
+      if(cell.id % 1 === 0) this.ctx.strokeStyle = "black";
+      if(cell.id % 2 === 0) this.ctx.strokeStyle = "lime";
+      if(cell.id % 3 === 0) this.ctx.strokeStyle = "red";
+      
+      
+      this.ctx.strokeRect(
+         cell.position.x,
+         cell.position.y,
+         this.linkMaxDist,
+         this.linkMaxDist
+      );
+
+      this.ctx.restore();
    }
 
 }

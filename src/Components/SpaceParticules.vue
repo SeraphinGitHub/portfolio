@@ -14,7 +14,7 @@
    export default {
       data() {
          return {
-            imgPath:       "./images/star.png" as string,
+            imgPath:      "/images/star.png"   as string,
             ctx:           undefined           as CanvasRenderingContext2D | undefined,
             Constellation: undefined           as ConstellationClass       | undefined,
             Cursor:        undefined           as CursorClass              | undefined,
@@ -30,21 +30,22 @@
             
             this.ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
             this.ctx.strokeStyle = "white";
-            this.ctx.lineWidth = 2;
+            this.ctx.lineWidth   = 2;
 
-            this.Constellation = new ConstellationClass(canvas, this.imgPath) as ConstellationClass;
-            this.Cursor        = new CursorClass (canvas, this.Constellation) as CursorClass;
+            this.Constellation = new ConstellationClass(canvas, this.ctx, this.imgPath) as ConstellationClass;
+            this.Cursor        = new CursorClass       (canvas, this.Constellation)     as CursorClass;
             
-            window.addEventListener("mousemove", (event) => this.Cursor!.detect(event));
-            // window.addEventListener("mousedown", (event) => this.Cursor!.detect(event));
-            // window.addEventListener("mouseup",   (event) => this.Cursor!.detect(event));
+            window.addEventListener("resize",    (event) => this.Constellation!.resize(event));
+            window.addEventListener("mousemove", (event) => this.Cursor!.setMousePos(event));
+            window.addEventListener("mousedown", (     ) => this.Cursor!.isAttracting = true);
+            window.addEventListener("mouseup",   (     ) => this.Cursor!.isExploding  = true);
             
             this.animation();
          },
 
          animation() {
-            this.Cursor!.interact();
-            this.Constellation!.handleStars(this.ctx!);
+            this.Cursor!.update();
+            this.Constellation!.update();
             requestAnimationFrame(this.animation);
          },
       },
@@ -61,7 +62,7 @@
       /* background: black; */
       position: fixed;
       top: 0;
-      left: 0;
+      right: 0;
       height: 100%;
       width: 100%;
       object-fit: contain;

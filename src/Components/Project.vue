@@ -4,7 +4,7 @@
         <div class="gold-frame"/>
 
         <figure class="flexCenter fig" @click="toggleProject()">
-            <img :src="project.imageUrl" alt="photo du site web">
+            <img :src="project.imageUrl">
             <div class="flexCenter white-filter"></div>
         </figure>
         
@@ -185,8 +185,7 @@
         overflow: hidden;
         height: $projectSize;
         width: $projectWidth;
-        margin: 20px;
-        margin-top: 50px;
+        margin: 50px;
         margin-bottom: 0px;
         border-radius: $marginBase + 15px 0 $marginBase + 15px 0;
         border: 3px solid black;
@@ -202,24 +201,27 @@
 
     
     /* ========== Picture ========== */
-    .project-frame figure {
-        position: relative;
-        overflow: hidden;
-        height: $figHeigth;
-        width: 90%;
-        margin: auto;
-        margin-top: $marginBase;
-        margin-bottom: 0;
-        border-radius: $marginBase 0 $marginBase 0;
+    .project-frame {
+        figure {
+            position: relative;
+            overflow: hidden;
+            height: $figHeigth;
+            width: 90%;
+            margin: auto;
+            margin-top: $marginBase;
+            margin-bottom: 0;
+            border-radius: $marginBase 0 $marginBase 0;
+        }
+        
+        img {
+            cursor: pointer;
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+            background: white;
+        }
     }
 
-    .project-frame img {
-        cursor: pointer;
-        object-fit: cover;
-        height: 100%;
-        width: 100%;
-        background: white;
-    }
 
     .white-filter {
         cursor: pointer;
@@ -253,40 +255,40 @@
         width: $titleWidth;
         margin-top: 15px;
         margin-bottom: 10px;
+        
+        h2 {
+            margin-right: 7px;
+        }
     }
 
-    .title h2 {
-        margin-right: 7px;
-    }
 
     .created-at {
         width: 100% - $titleWidth;
     }
 
+
+    .created-at,
     .description,
     .skills {
         justify-content: flex-start;
-    }
 
-    .created-at h3,
-    .description h3,
-    .skills h3 {
-        margin: 0;
-        margin-top: $marginTopBase;
-        margin-right: 10px;
-        font-size: 110%;
-        font-weight: 400;
-        text-decoration-line: underline;
-        text-underline-offset: 4px;
-        text-decoration-thickness: 2px;
-    }
+        p {
+            margin: 0;
+            margin-top: $marginTopBase;
+            line-height: 120%;
+            font-size: 100%;
+        }
 
-    .created-at p,
-    .description p {
-        margin: 0;
-        margin-top: $marginTopBase;
-        line-height: 120%;
-        font-size: 100%;
+        h3 {
+            margin: 0;
+            margin-top: $marginTopBase;
+            margin-right: 10px;
+            font-size: 110%;
+            font-weight: 400;
+            text-decoration-line: underline;
+            text-underline-offset: 4px;
+            text-decoration-thickness: 2px;
+        }
     }
     
 
@@ -295,19 +297,20 @@
     .skills {
         padding-left: $paddingSide;
         margin-bottom: $marginTopBase + 5px;
+        
+        h3 {
+            width: 100%;
+            margin-left: - $paddingSide;
+        }
+
+        li {
+            list-style-type: disc;
+            width: 25%;
+            margin-top: 8px;
+            font-size: 100%;
+        }
     }
 
-    .skills h3 {
-        width: 100%;
-        margin-left: - $paddingSide;
-    }
-
-    .skills li {
-        list-style-type: disc;
-        width: 25%;
-        margin-top: 8px;
-        font-size: 100%;
-    }
 
 
     /* ========== Buttons ========== */
@@ -342,7 +345,7 @@
 
     .open-caption {
         height: 215px;
-        width: 64%;
+        width: 65%;
         margin-right: 0;
     }
 
@@ -351,8 +354,6 @@
         transform: translateX(-10%);
         transition-delay: $delay + 0.3;
     }
-
-
 
     .close-project {
         height: $projectSize;
@@ -393,16 +394,30 @@
         transition-duration: 0.5s;
     }
 
-    @media screen and (min-width: 1600px) and (max-width : 1919px) {
+    @media screen and (max-width : 1919px) {
 
         .project-frame {
             margin: 15px;
-            height: 235px;
+            height: 245px;
             width: 310px;
+
+            figure {
+                margin: 15px;
+                margin-bottom: 0px;
+                height: 140px;
+            }
+
+            h2, h3 {
+                font-size: 100%;
+            }
+
+            p {
+                font-size: 90%;
+            }
         }
 
         .open-project {
-            height: 650px;
+            height: auto;
             width: 100%;
         }
 
@@ -410,31 +425,45 @@
             width: 84% !important;
         }
 
-        .project-frame figure {
-            margin: 10px;
-            margin-bottom: 0px;
-            height: 140px;
-        }
-
-        .project-frame h2,
-        .project-frame h3 {
-            font-size: 100%;
-        }
-
-        .project-frame p {
-            font-size: 90%;
-        }
-
         .project-caption {
-            margin: 10px;
+            margin: 15px;
+
+            h2,
+            .title {
+                width: 100%; 
+            }
         }
 
-        .project-caption h2 {
-            width: 55%;
+        .open-caption {
+            height: auto;
+
+            h2,
+            .title {
+                width: 75%; 
+            }
         }
 
         .created-at {
-            width: 44%;
+            width: 24%;
+        }
+
+        .description {
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .skills {
+            height: auto;
+            
+            li {
+                width: 50%;
+            }
+        }
+        
+        .switch-to-btn {
+            padding-right: 0px;
+            width: 22%;
+            margin: 10px;
         }
     }
 
