@@ -1,10 +1,10 @@
 <template>
     <li class="flexCenter project-frame bgd-1" ref="projectRef">
-
+        
         <div class="gold-frame"/>
 
         <figure class="flexCenter fig" @click="toggleProject()">
-            <img :src="project.imageUrl">
+            <img class="thumbnail" :src="project.imageUrl">
             <div class="flexCenter white-filter"></div>
         </figure>
         
@@ -31,9 +31,7 @@
         </div>
 
         <button class="flexCenter btn green-btn switch-to-btn" @click="goToPage()">
-            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
-                <path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32H320zM80 32C35.8 32 0 67.8 0 112V432c0 44.2 35.8 80 80 80H400c44.2 0 80-35.8 80-80V320c0-17.7-14.3-32-32-32s-32 14.3-32 32V432c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16H192c17.7 0 32-14.3 32-32s-14.3-32-32-32H80z"/>
-            </svg>
+            <img src="/icons/link.png" class="link-icon"/>
             <p>{{ langPack.openLink[selectedLang] }}</p>
         </button>
 
@@ -42,8 +40,14 @@
 
 
 <script>
+    import ImageRain from "./Effects/ImageRain.vue"
+
     export default {
         name: "Project",
+
+        components: {
+            ImageRain,
+        },
 
         props: {
             project:      Object,
@@ -106,7 +110,7 @@
                 figure.classList.remove("close-fig");
                 caption.classList.remove("close-caption");
                 btn.classList.remove("close-btn");
-
+                
                 project.classList.add("open-project");
                 figure.classList.add("open-fig");
                 caption.classList.add("open-caption");
@@ -151,10 +155,12 @@
 
     $marginBase: 15px;
     $projectWidth: 370px;
-    $projectSize: $projectWidth *0.7;
+    $projectHeight: $projectWidth *0.7;
     $figHeigth: 155px;
     $captionHeigth: 65px;
     $btnTranslate: 120%;
+
+
 
     /* ******************************* Gold Frame ******************************* */
     $size: 15px;
@@ -179,11 +185,13 @@
     }
     /* ******************************* Gold Frame ******************************* */
     
+
+
     .project-frame {
         position: relative;
         justify-content: space-between;
         overflow: hidden;
-        height: $projectSize;
+        height: $projectHeight;
         width: $projectWidth;
         margin: 50px;
         margin-bottom: 0px;
@@ -206,19 +214,17 @@
             position: relative;
             overflow: hidden;
             height: $figHeigth;
-            width: 90%;
-            margin: auto;
-            margin-top: $marginBase;
+            margin: $marginBase;
             margin-bottom: 0;
             border-radius: $marginBase 0 $marginBase 0;
         }
         
-        img {
+        .thumbnail {
             cursor: pointer;
-            object-fit: cover;
+            object-fit: contain;
             height: 100%;
             width: 100%;
-            background: white;
+            background: transparent;
         }
     }
 
@@ -245,7 +251,11 @@
         padding-left: 10px;
         padding-right: 10px;
         border-radius: $marginBase 0 $marginBase 0;
-        background: linear-gradient(to bottom, rgb(130, 130, 130), rgb(245, 245, 245), rgb(110, 110, 110));
+        background: linear-gradient(to bottom, 
+            dimgrey,
+            white,
+            dimgrey
+        );
     }
 
     $marginTopBase: 5px;
@@ -323,8 +333,8 @@
         transform: translateX($btnTranslate);
     }
 
-    .fa-sign-in-alt {
-        font-size: 140%;
+    .link-icon {
+        height: 35px;
     }
 
 
@@ -337,10 +347,7 @@
     }
 
     .open-fig {
-        margin-left: auto !important;
-        margin-right: auto !important;
         height: 393px !important;
-        width: 70% !important;
     }
 
     .open-caption {
@@ -356,7 +363,7 @@
     }
 
     .close-project {
-        height: $projectSize;
+        height: $projectHeight;
         transition-delay: $delay;
     }
 
@@ -421,10 +428,6 @@
             width: 100%;
         }
 
-        .open-fig {
-            width: 84% !important;
-        }
-
         .project-caption {
             margin: 15px;
 
@@ -439,12 +442,12 @@
 
             h2,
             .title {
-                width: 75%; 
+                width: 70%; 
             }
         }
 
         .created-at {
-            width: 24%;
+            width: 26%;
         }
 
         .description {
@@ -462,8 +465,9 @@
         
         .switch-to-btn {
             padding-right: 0px;
-            width: 22%;
+            width: 20%;
             margin: 10px;
+            margin-left: 25px;
         }
     }
 

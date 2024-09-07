@@ -2,12 +2,24 @@
    <section class="flexCenter main">
 
       <div class="background"/>
+      <div class="black-filter"/>
       
       <LangBar class="lang-bar"
          @changeLang="updateLang"
       />
 
       <SpaceParticules class="constellation"/>
+      <ImageRain class="imageRain"
+         :hasTrail ="false"
+         :density  ="300"
+         :speed    ="0.8"
+      />
+      
+      <ImageRain class="imageRain"
+         :hasTrail ="true"
+         :density  ="80"
+         :speed    ="1.5"
+      />
       
       <div class="spinal-1">
          <div class="back"/>
@@ -43,9 +55,10 @@
 
 <script>
    import Project         from "./Project.vue"
-   import Spin            from "./Spin.vue"
    import LangBar         from "./LangBar.vue"
-   import SpaceParticules from "./SpaceParticules.vue"
+   import Spin            from "./Effects/Spin.vue"
+   import SpaceParticules from "./Effects/SpaceParticules.vue"
+   import ImageRain from "./Effects/ImageRain.vue"
 
    export default {
       name: "MainPage",
@@ -55,6 +68,7 @@
          Spin,
          LangBar,
          SpaceParticules,
+         ImageRain,
       },
 
       data() {
@@ -212,8 +226,47 @@
 
 <style scoped lang="scss">
 
+   $DayNightAnim: 40s;
+
+   .constellation {
+      z-index: 10;
+   }
+
+   .imageRain {
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      height: 100%;
+      width: 100%;
+      opacity: 24%;
+
+      animation: Day_and_Night $DayNightAnim ease-in-out infinite;
+   }
+
+   .black-filter {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      background: black;
+      opacity: 40%;
+
+
+      animation: Day_and_Night $DayNightAnim ease-in-out infinite;
+   }
+
+   @keyframes Day_and_Night {
+      0%  { opacity: 6%;  }
+      50% { opacity: 45%; }
+      100%{ opacity: 6%;  }
+   }
+
+
+
    .space-between {
       justify-content: space-between;
+      margin-bottom: 50px;
    }
 
    .main {
@@ -250,12 +303,8 @@
       left: 0;
       overflow: auto;
       overflow-x: hidden;
-      height: 98%;
+      height: 100%;
       width: 50%;
-   }
-   
-   .constellation {
-      z-index: 10;
    }
 
    .spinal-1 {
@@ -266,6 +315,7 @@
       height: 100px;
       width: 100px;
       transform: translate(-50%, -50%) rotate(-30deg);
+      animation: Wiggle $DayNightAnim ease-in-out infinite;
 
       .back {
          z-index: 9;
@@ -288,6 +338,7 @@
       height: 100px;
       width: 100px;
       transform: translate(-50%, -50%) rotate(-30deg);
+      animation: Wiggle $DayNightAnim ease-in-out infinite;
 
       .top {
          position: absolute;
@@ -308,6 +359,13 @@
       }
    }
 
+   @keyframes Wiggle {
+      0%   { top: 56%; left: 72%;  }
+      50%  { top: 44%; left: 68%;  }
+      100% { top: 56%; left: 72%;  }
+   }
+
+
    @media screen and (min-width : 2600px) {
       .flow {
          width: 55%;
@@ -317,6 +375,10 @@
    @media screen and (max-width : 2599px) {
       .flow {
          width: 75%;
+      }
+
+      .space-between {
+         margin-bottom: 15px;
       }
    }
 

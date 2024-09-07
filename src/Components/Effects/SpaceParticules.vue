@@ -9,7 +9,7 @@
    import {
       ConstellationClass,
       CursorClass,
-   } from "../Classes/_export";
+   } from "../../Scripts/SpaceParticules/_export";
 
    export default {
       data() {

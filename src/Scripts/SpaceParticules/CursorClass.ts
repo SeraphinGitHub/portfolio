@@ -1,5 +1,5 @@
 
-import { Iposition } from "../interfaces";
+import { Iposition } from "../../interfaces";
 
 import { 
    ConstellationClass,

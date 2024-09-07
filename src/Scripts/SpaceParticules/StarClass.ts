@@ -2,7 +2,7 @@
 import {
    INumber,
    Iposition,
-} from "../interfaces";
+} from "../../interfaces";
 
 // =====================================================================
 // Star Class

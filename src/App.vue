@@ -1,6 +1,8 @@
 
 <template>
 
+   <div class="filter"/>
+
    <MainPage/>
 
 </template>
@@ -18,6 +20,25 @@
 </script>
 
 <style>
+
+   .filter {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;   
+      width: 100%;
+      background: black;
+      z-index: 100;
+      animation: fadeOut 3s linear 1;
+      animation-delay: 6s;
+   }
+
+
+   @keyframes fadeOut {
+      0%   { opacity: 100%; z-index: 100; }
+      100% { opacity: 0%;   z-index: 0;   }
+   }
+
    html * {
       margin: 0;
       padding: 0;

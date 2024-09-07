@@ -1,7 +1,7 @@
 
 import {
    Iposition,
-} from "../interfaces";
+} from "../../interfaces";
 
 import {
    StarClass,
