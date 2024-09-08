@@ -18,9 +18,9 @@ export class StarClass {
    oldVelocity: Iposition = { x: 0, y: 0 };
    
    imgSize:     number    = 53; // Image ==> 53 x 53 px
-   size:        number    = this.randValue(8, 32);
-   halfSize:    number    = this.size *0.5;
    friction:    number    = 0.02;
+   size:        number;
+   halfSize:    number;
 
    isPosSaved:  boolean = false;
    hasExplode:  boolean = false;
@@ -36,6 +36,8 @@ export class StarClass {
    ) {
       this.id       = id;
       this.constell = constellation;
+      this.size     = this.randValue(constellation.starSize, constellation.starRange);
+      this.halfSize = this.size *0.5;
 
       this.position = {
          x: this.randValue(this.constell.leftBorder, this.constell.width  -this.size),
@@ -65,7 +67,7 @@ export class StarClass {
       range:   number,
    ): number {
 
-      return Math.floor( (Math.random() * range + base) *10 ) /10;
+      return Math.floor( (Math.random() *range +base) *10) /10;
    }
 
    randVelocity() {

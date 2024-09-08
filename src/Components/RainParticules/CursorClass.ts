@@ -39,7 +39,11 @@ export class CursorClass {
 
    update(particule: ParticulesClass) {
       
-      if(this.isColliding(particule)) this.handleCollision(particule);
+      if(this.isColliding(particule)) {
+         this.handleCollision(particule);
+      }
+
+      else particule.pixelColor = "white";
    }
 
    isColliding(
@@ -88,7 +92,7 @@ export class CursorClass {
          particule.y  +=  this.updatePosition(partY, mouseY, halfSize, max_Y, gravity);
       }
 
-      else {         
+      else {      
          const distX:  number = partX -mouseX;
          const distY:  number = partY -mouseY;
          const angle:  number = (Math.atan2(distY, distX) * 180) / Math.PI;
@@ -97,6 +101,9 @@ export class CursorClass {
 
          particule.x += forceX;
          particule.y += forceY;
+
+         // particule.x  -=  this.updatePosition(partX, mouseX, halfSize, max_X, gravity);
+         // particule.y  -=  this.updatePosition(partY, mouseY, halfSize, max_Y, gravity);
       }
 
       if(this.isExploding) {

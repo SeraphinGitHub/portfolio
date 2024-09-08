@@ -13,7 +13,6 @@ import {
 export class ConstellationClass {
 
    canvas: HTMLCanvasElement;
-   ctx:    CanvasRenderingContext2D;
    img:    HTMLImageElement;
    
    emptyWidth: number = 0.4; // 40% screen size
@@ -21,22 +20,30 @@ export class ConstellationClass {
    width:       number;
    height:      number;
    leftBorder:  number ;
-   density:     number = 400;
-   linkMaxDist: number = 100;
+   density:     number;
+   starRange:   number;
+   starSize:    number;
+   linkMaxDist: number;
    frame:       number = 0;
    
    starsArray: StarClass[] = [];
    linksArray: unknown[]   = [];
 
    constructor(
-      canvas:  HTMLCanvasElement,
-      ctx:     CanvasRenderingContext2D,
-      imgPath: string,
+      canvas:    HTMLCanvasElement,
+      imgPath:   string,
+      density:   number,
+      starRange: number,
+      starSize:  number,
+      linkDist:  number,
    ) {
       this.canvas     = canvas;
-      this.ctx        = ctx;
       this.img        = new Image();
       this.img.src    = imgPath;
+      this.density    = density;
+      this.starRange  = starRange;
+      this.starSize   = starSize;
+      this.linkMaxDist= linkDist;
       this.width      = this.canvas.width;
       this.height     = this.canvas.height;
       this.leftBorder = this.width *this.emptyWidth;
@@ -51,6 +58,8 @@ export class ConstellationClass {
          height:     this.height,
          emptyWidth: this.emptyWidth,
          leftBorder: this.leftBorder,
+         starRange:  this.starRange,
+         starSize:   this.starSize,
          img:        this.img,
       }
 
@@ -59,7 +68,10 @@ export class ConstellationClass {
       }
    }
 
-   resize(event: any) {
+   resize(
+      ctx:   CanvasRenderingContext2D,
+      event: any,
+   ) {
 
       const eventWidth  = event.target.window.innerWidth;
       const eventHeight = event.target.window.innerHeight;
@@ -69,8 +81,8 @@ export class ConstellationClass {
       this.canvas.width  = eventWidth;
       this.canvas.height = eventHeight;
 
-      this.ctx.strokeStyle = "white";
-      this.ctx.lineWidth   = 2;
+      ctx.strokeStyle = "white";
+      ctx.lineWidth   = 2;
 
       this.starsArray.forEach((star) => star.reset(eventWidth, eventHeight));
    }
@@ -213,9 +225,8 @@ export class ConstellationClass {
       });
    }
 
-   update() {
-         
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+   update(ctx: CanvasRenderingContext2D) {
+
       this.frame++;
       
       // Connect stars every 7 frames
@@ -232,45 +243,51 @@ export class ConstellationClass {
          
       
       // this.starsArray.forEach(star => this.drawFrame(star));
-      this.linksArray.forEach(link => this.drawLink(link));
-      this.starsArray.forEach(star => star.update(this.ctx));
+      this.linksArray.forEach(link => this.drawLink(ctx, link));
+      this.starsArray.forEach(star => star.update(ctx));
    }
 
-   drawLink(link: any) {
+   drawLink(
+      ctx:  CanvasRenderingContext2D,
+      link: any,
+   ) {
 
       const { startPos, endPos, opacity }: any  = link;
       const { x: startX, y: startY }: Iposition = startPos;
       const { x: endX,   y: endY   }: Iposition = endPos;
 
-      this.ctx.save();
-      this.ctx.globalAlpha = opacity;
+      ctx.save();
+      ctx.globalAlpha = opacity;
 
-      this.ctx.beginPath();
-      this.ctx.moveTo( startX, startY );
-      this.ctx.lineTo( endX,   endY   );
-      this.ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo( startX, startY );
+      ctx.lineTo( endX,   endY   );
+      ctx.stroke();
 
-      this.ctx.restore();
+      ctx.restore();
    }
    
-   drawFrame(cell: StarClass) {
+   drawFrame(
+      ctx:  CanvasRenderingContext2D,
+      cell: StarClass,
+   ) {
 
-      this.ctx.save();
-      this.ctx.lineWidth = 1;
+      ctx.save();
+      ctx.lineWidth = 1;
       
-      if(cell.id % 1 === 0) this.ctx.strokeStyle = "black";
-      if(cell.id % 2 === 0) this.ctx.strokeStyle = "lime";
-      if(cell.id % 3 === 0) this.ctx.strokeStyle = "red";
+      if(cell.id % 1 === 0) ctx.strokeStyle = "black";
+      if(cell.id % 2 === 0) ctx.strokeStyle = "lime";
+      if(cell.id % 3 === 0) ctx.strokeStyle = "red";
       
       
-      this.ctx.strokeRect(
+      ctx.strokeRect(
          cell.position.x,
          cell.position.y,
          this.linkMaxDist,
          this.linkMaxDist
       );
 
-      this.ctx.restore();
+      ctx.restore();
    }
 
 }

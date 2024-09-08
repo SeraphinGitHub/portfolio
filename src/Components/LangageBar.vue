@@ -22,9 +22,9 @@
 
 <script>
    export default {
-      name: "LangBar",
       
       methods: {
+         
          handleLanguage(lang) {
             this.$emit("changeLang", lang);
          },

@@ -4,7 +4,7 @@
         <div class="gold-frame"/>
 
         <figure class="flexCenter fig" @click="toggleProject()">
-            <img class="thumbnail" :src="project.imageUrl">
+            <img class="thumbnail" :src="project.imageUrl" loading="lazy">
             <div class="flexCenter white-filter"></div>
         </figure>
         
@@ -26,12 +26,12 @@
             
             <div v-show="project.skills" class="flexCenter skills">
                 <h3>{{ langPack.technologies[selectedLang] }} :</h3>
-                <li v-for="skill in skills" :key="skill">{{ skill }}</li>
+                <li v-for="skill in project.skills" :key="skill">{{ skill }}</li>
             </div>
         </div>
 
         <button class="flexCenter btn green-btn switch-to-btn" @click="goToPage()">
-            <img src="/icons/link.png" class="link-icon"/>
+            <img src="/icons/link.png" class="link-icon" loading="lazy"/>
             <p>{{ langPack.openLink[selectedLang] }}</p>
         </button>
 
@@ -40,13 +40,11 @@
 
 
 <script>
-    import ImageRain from "./Effects/ImageRain.vue"
-
     export default {
         name: "Project",
 
         components: {
-            ImageRain,
+
         },
 
         props: {
@@ -57,14 +55,9 @@
 
         data() {
         return {
-            skills:     "",
             isOpen:     false,
             projectDOM: {},
         }},
-
-        beforeMount() {
-            this.skills = this.project.skills;
-        },
 
         mounted() {
             this.init();

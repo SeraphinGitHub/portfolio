@@ -52,6 +52,13 @@ export class CursorClass {
       }
    }
 
+   checkBound() {
+      const { x: mouseX }: Iposition = this.position;
+      const leftBorder:    number    = this.Constellation.leftBorder;
+
+      if(mouseX > leftBorder) this.isAttracting = true;
+   }
+
    update() {
 
       this.starsList.forEach(star => {
@@ -111,7 +118,7 @@ export class CursorClass {
       const { x: starX,  y: starY  }: Iposition = star.position;
       const { x: mouseX, y: mouseY }: Iposition = this.position;
 
-      const min_X = star.constell.leftBorder;
+      const min_X = this.Constellation.leftBorder;
       const min_Y = star.halfSize;
       const max_X = this.canvas.width  -star.halfSize;
       const max_Y = this.canvas.height -star.halfSize;

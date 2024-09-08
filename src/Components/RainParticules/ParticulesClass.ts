@@ -11,34 +11,32 @@ export class ParticulesClass {
    y:          number;
    height:     number;
    width:      number;
-   gradient:   CanvasGradient;
 
-   size:       number;
-   velocity:   number;
-   speed:      number;
    maxSpeed:   number = 2.5; // Max brightness ==> 255, shorten as 2.5 for better perf 
+   speed:      number;
+   velocity:   number;
+   size:       number;
 
-   pixelColor: string = "";
+   pixelColor: string = "white";
 
    constructor(
       imageMap:  any,
       id:        number,
       width:     number,
       height:    number,
-      gradient:  CanvasGradient,
       veloCoeff: number,
+      sizeCoeff: number,
    ) {
       this.imageMap = imageMap;
       
       this.id       = id;
       this.x        = Math.random() *width;
-      this.y        = 0;
+      this.y        = Math.random() *height;
       this.width    = width;
       this.height   = height;
-      this.gradient = gradient;
       this.speed    = 0;
-      this.size     = Math.random() *2.5 +1;
       this.velocity = Math.random() *veloCoeff;
+      this.size     = Math.random() *sizeCoeff +0.5;
    }
 
    resetPosotion() {
@@ -60,7 +58,7 @@ export class ParticulesClass {
       this.resetPosotion();
 
       // ==> Using Image color or Gradient
-         this.speed = this.maxSpeed;
+         this.speed = 1;
          // this.setSpeedAndPixelColor();
       //
 
@@ -124,7 +122,7 @@ export class ParticulesClass {
       }
    }
 
-   drawImgColor(ctx: CanvasRenderingContext2D) {
+   drawImageData(ctx: CanvasRenderingContext2D) {
 
       ctx.beginPath();
       ctx.fillStyle = this.pixelColor;
@@ -132,14 +130,27 @@ export class ParticulesClass {
       ctx.fill();
    }
 
-   drawGradient(ctx: CanvasRenderingContext2D, hasTrail: boolean) {
+   drawColor(
+      ctx:      CanvasRenderingContext2D,
+      hasTrail: boolean,
+   ) {
 
       ctx.beginPath();
-      // ctx.fillStyle = this.gradient;
-      ctx.fillStyle = "white";
+      ctx.fillStyle = this.pixelColor;
 
-      if(!hasTrail && this.id % 2 === 0) ctx.fillStyle = "gold";
+      if(!hasTrail && this.id % 2 === 0) ctx.fillStyle = "yellow";
 
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI *2);
+      ctx.fill();
+   }
+
+   drawGradient(
+      ctx:      CanvasRenderingContext2D,
+      gradient: CanvasGradient,
+   ) {
+
+      ctx.beginPath();
+      ctx.fillStyle = gradient;
       ctx.arc(this.x, this.y, this.size, 0, Math.PI *2);
       ctx.fill();
    }

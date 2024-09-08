@@ -1,82 +1,70 @@
 <template>
-   <section class="flexCenter main">
+   <section class="flexCenter fullCover">
 
-      <div class="background"/>
-      <div class="black-filter"/>
+      <div class="sky-bgd fullCover"/>
+      <div class="black-filter fullCover"/>
       
-      <LangBar class="lang-bar"
+      <LangageBar class="lang-bar"
          @changeLang="updateLang"
       />
 
-      <SpaceParticules class="constellation"/>
-      <ImageRain class="imageRain"
+      <ConstellationParticules class="constellation"
+         :density   ="300"
+         :starRange ="30"
+         :starSize  ="10"
+         :linkDist  ="120"
+      />
+
+      <RainParticules class="rain fullCover"
+         :height   ="height"
+         :width    ="width"
+         :density  ="400"
+         :velocity ="1.2"
+         :size     ="2.2"
          :hasTrail ="false"
-         :density  ="300"
-         :speed    ="0.8"
       />
       
-      <ImageRain class="imageRain"
+      <RainParticules class="rain fullCover"
+         :height   ="height"
+         :width    ="width"
+         :density  ="150"
+         :velocity ="3"
+         :size     ="2"
          :hasTrail ="true"
-         :density  ="80"
-         :speed    ="1.5"
       />
       
-      <div class="spinal-1">
-         <div class="back"/>
-      </div>
-      
-      <div class="spinal-2">
-         <div class="bot"/>
-         <Spin :style="varSpinBot"/>
-         <Spin :style="varSpinMid1"/>
-         <Spin :style="varSpinMid2"/>
-         <Spin :style="varSpinTop"/>
-         <div class="top"/>
-      </div>
-
-      <ul class="flexCenter flow">
-
-         <div class="flexCenter" v-for="row in projectsList" :key="row" ref="projDivRef">
-
-            <Project v-for="project in row" :key ="project.id" ref="projElemRef"
-               :id           ="project.id"
-               :project      ="project"
-               :langPack     ="langPack"
-               :selectedLang ="selectedLang"
-               @closeOthers  ="closeOtherProject"
-            />
-         </div>
-
-      </ul>
+      <Galaxy/>
+      <ProjectFlow :responseList ="responseList"/>
 
    </section>
 </template>
 
 
 <script>
-   import Project         from "./Project.vue"
-   import LangBar         from "./LangBar.vue"
-   import Spin            from "./Effects/Spin.vue"
-   import SpaceParticules from "./Effects/SpaceParticules.vue"
-   import ImageRain from "./Effects/ImageRain.vue"
+   import LangageBar                from "./LangageBar.vue"
+   import Galaxy                    from "./Galaxy/__Galaxy.vue"
+   import ConstellationParticules   from "./ConstellationParticules/__ConstellationParticules.vue"
+   import RainParticules            from "./RainParticules/__RainParticules.vue"
+   import ProjectFlow               from "./ProjectFlow.vue"
+
+   // import { imgStr } from "../../Scripts/RainParticules/imgTo64_Barrack_Lighten"
 
    export default {
       name: "MainPage",
 
       components: {
-         Project,
-         Spin,
-         LangBar,
-         SpaceParticules,
-         ImageRain,
+         LangageBar,
+         Galaxy,
+         ConstellationParticules,
+         RainParticules,
+         ProjectFlow,
       },
 
       data() {
       return {
-         projectsList: [],
+         height:       window.innerHeight,
+         width:        window.innerWidth,
          responseList: [],
-         langPack:     {},
-         selectedLang: "FR",
          projectToWake: [
             "https://heroic-adventure.onrender.com/wake",
             // "https://bf-manager.onrender.com/wake",
@@ -86,75 +74,10 @@
       async mounted() {
          
          await this.wakeUpProjects();
-         await this.getLangPack();
          await this.getProjects();
-
-         this.generateProjects();
-      },
-
-      computed: {
-         varSpinTop() {
-         return {
-            // "--noseColor": "crimson",
-            // "--tailColor": "darkred",
-            "--noseColor": "yellow",
-            "--tailColor": "gold",
-            "--size" :      300 +"px",
-            "--top":        30 +"%",
-            "--left":       50 +"%",
-            "--startAngle": 0  +"deg",
-            "--endAngle"  : 360 +"deg",
-            "--anim":       5 +"s",
-         }},
-
-         varSpinMid1() {
-         return {
-            "--noseColor": "darkviolet",
-            "--tailColor": "darkmagenta",
-            "--size" :      800 +"px",
-            "--top":        50 +"%",
-            "--left":       50 +"%",
-            "--startAngle": 0   +"deg",
-            "--endAngle"  : 360 +"deg",
-            "--anim":       12 +"s",
-         }},
-
-         varSpinMid2() {
-         return {
-            "--noseColor": "darkviolet",
-            "--tailColor": "darkmagenta",
-            "--size":       800 +"px",
-            "--top":        50 +"%",
-            "--left":       50 +"%",
-            "--startAngle": 90  +"deg",
-            "--endAngle"  : 450 +"deg",
-            "--anim":       12 +"s",
-         }},
-
-         varSpinBot() {
-         return {
-            "--noseColor": "dodgerblue",
-            "--tailColor": "dodgerblue",
-            "--size" :      400 +"px",
-            "--top":        70 +"%",
-            "--left":       50 +"%",
-            "--startAngle": 90  +"deg",
-            "--endAngle"  : 450 +"deg",
-            "--anim":       8 +"s",
-         }},
       },
 
       methods: {
-
-         closeOtherProject(projectID) {
-            const projectRef = this.$refs.projElemRef;
-
-            for(let i = 0; i < projectRef.length; i++) {
-               const project = projectRef[i];
-               
-               if(project.isOpen && i !== projectID) project.closeProject();
-            }
-         },
 
          async wakeUpProjects () {
             
@@ -174,49 +97,8 @@
             this.responseList.sort().reverse();
          },
 
-         async getLangPack() {
-            this.langPack = await fetch("./lang.json")
-            .then(data => { return data.json() });
-         },
-
          updateLang(lang) {
             this.selectedLang = lang;
-         },
-
-         generateProjects() {
-
-            let id    = 0;
-            let count = 0;
-            let isPair = false;
-
-            let tempsList    = [];
-            let projectsList = [];
-
-            this.responseList.forEach((project) => {
-               project["id"] = id;
-               id++;
-               count++;
-
-               tempsList.push(project);
-
-               if(count === 3 && !isPair
-               || count === 2 &&  isPair) {
-
-                  count  = 0;
-                  isPair = !isPair;
-                  projectsList.push(tempsList);
-                  tempsList = [];
-               }
-            });
-
-            if(tempsList.length > 0) projectsList.push(tempsList);
-
-            this.projectsList = projectsList;
-
-            this.$nextTick(() => {
-               const lastIndex = this.$refs.projDivRef.length -1;
-               if(tempsList.length === 2) this.$refs.projDivRef[lastIndex].classList.add("space-between");
-            });
          },
 
       },
@@ -226,60 +108,26 @@
 
 <style scoped lang="scss">
 
-   $DayNightAnim: 40s;
+   $DayNightAnim: 60s;
+
+   .fullCover {
+      position: fixed;
+      top:      0px;
+      left:     0px;
+      height:   100%;
+      width:    100%;
+   }
 
    .constellation {
       z-index: 10;
    }
 
-   .imageRain {
-      position: fixed;
-      top: 0px;
-      left: 0px;
-      height: 100%;
-      width: 100%;
-      opacity: 24%;
-
+   .rain {
+      // opacity: 60%;
       animation: Day_and_Night $DayNightAnim ease-in-out infinite;
    }
 
-   .black-filter {
-      position: fixed;
-      top: 0;
-      right: 0;
-      height: 100%;
-      width: 100%;
-      background: black;
-      opacity: 40%;
-
-
-      animation: Day_and_Night $DayNightAnim ease-in-out infinite;
-   }
-
-   @keyframes Day_and_Night {
-      0%  { opacity: 6%;  }
-      50% { opacity: 45%; }
-      100%{ opacity: 6%;  }
-   }
-
-
-
-   .space-between {
-      justify-content: space-between;
-      margin-bottom: 50px;
-   }
-
-   .main {
-      position: fixed;
-      top: 0px;
-      left: 0px;
-      height: 100%;
-      width: 100%;
-   }
-
-   .background {
-      height: 100%;
-      width: 100%;
+   .sky-bgd {
       background: linear-gradient(to bottom right,
          black,
          dimgray,
@@ -294,102 +142,19 @@
       );
    }
 
-   .flow {
-      z-index: 50;
-      scrollbar-width: none;
-      position: fixed;
-      justify-content: flex-start;
-      top: 0;
-      left: 0;
-      overflow: auto;
-      overflow-x: hidden;
-      height: 100%;
-      width: 50%;
+   .black-filter {
+      background: black;
+      // opacity: 40%;
+      animation: Day_and_Night $DayNightAnim ease-in-out infinite;
    }
 
-   .spinal-1 {
-      z-index: 5;
-      position: fixed;
-      top: 50%;
-      left: 70%;
-      height: 100px;
-      width: 100px;
-      transform: translate(-50%, -50%) rotate(-30deg);
-      animation: Wiggle $DayNightAnim ease-in-out infinite;
-
-      .back {
-         z-index: 9;
-         position: absolute;
-         top: 50%;
-         left: 50%;
-         height: 1400px;
-         width: 1400px;
-         border-radius: 50%;
-         transform: translate(-50%, -50%) rotateX(-72deg);
-         background: radial-gradient(circle at center, transparent, black, transparent, transparent);
-      }
-   }
-   
-   .spinal-2 {
-      z-index: 15;
-      position: fixed;
-      top: 50%;
-      left: 70%;
-      height: 100px;
-      width: 100px;
-      transform: translate(-50%, -50%) rotate(-30deg);
-      animation: Wiggle $DayNightAnim ease-in-out infinite;
-
-      .top {
-         position: absolute;
-         top: -4%;
-         height: 51px;
-         width: 100px;
-         border-radius: 50px 50px 0 0;
-         background-color: black;
-      }
-
-      .bot {
-         position: absolute;
-         top: 46%;
-         height: 52px;
-         width: 100px;
-         border-radius: 0 0 50px 50px;
-         background-color: black;
-      }
-   }
-
-   @keyframes Wiggle {
-      0%   { top: 56%; left: 72%;  }
-      50%  { top: 44%; left: 68%;  }
-      100% { top: 56%; left: 72%;  }
-   }
-
-
-   @media screen and (min-width : 2600px) {
-      .flow {
-         width: 55%;
-      }
-   }
-
-   @media screen and (max-width : 2599px) {
-      .flow {
-         width: 75%;
-      }
-
-      .space-between {
-         margin-bottom: 15px;
-      }
-   }
-
-   @media screen and (max-width : 1599px) {
-      .flow {
-         width: 40%;
-      }
-
-      .space-between {
-         justify-content: center;
-      }
+   @keyframes Day_and_Night {
+      0%  { opacity: 6%;  }
+      15% { opacity: 6%;  }
+      35% { opacity: 42%; }
+      65% { opacity: 42%; }
+      85% { opacity: 6%;  }
+      100%{ opacity: 6%;  }
    }
 
 </style>
