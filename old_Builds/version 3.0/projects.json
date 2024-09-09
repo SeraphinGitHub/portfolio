@@ -1,0 +1,313 @@
+[
+   {
+      "href": "https://tokatchi-conception.netlify.app/",
+      "skills": ["HTML / CSS"],
+      "imageUrl": "./images/TokatchiConception.jpg",
+
+      "title": {
+         "FR": ["Tokatchi", "Conception"],
+         "EN": ["Tokatchi", "Conception"],
+         "JP": ["Tokatchi", "Conception"]
+      },
+
+      "description": {
+         "FR": "Ancien site web, dessinateur en bureau d'études et conception 3D",
+         "EN": "Former website, draftsman in research department and 3D design",
+         "JP": "架空会社のwebサイト"
+      },
+
+      "createdAt": {
+         "FR": "Novembre 2020",
+         "EN": "November 2020",
+         "JP": "2020年 11月"
+      },
+
+      "isGolden": false
+   },
+
+   {
+      "href": "https://seraphingithub.github.io/FatetSeraphin_2_03012021/",
+      "skills": ["HTML / CSS"],
+      "imageUrl": "./images/Reservia.jpg",
+
+      "title": {
+         "FR": ["Reservia", "- OpenClassrooms"],
+         "EN": ["Reservia", "- OpenClassrooms"],
+         "JP": ["Reservia", "- 学校の課題"]
+      },
+
+      "description": {
+         "FR": "Projet N°2 - Création d'un site web à partir d'une maquette.",
+         "EN": "Project N°2 - Creation of a website from a mockup.",
+         "JP": "モックアップからWebサイトを作成します。"
+      },
+
+      "createdAt": {
+         "FR": "Janvier 2021",
+         "EN": "January 2021",
+         "JP": "2021年 1月"
+      },
+
+      "isGolden": false
+   },
+
+   {
+      "href": "https://seraphingithub.github.io/FatetSeraphin_3_01032021/",
+      "imageUrl": "./images/OhMyFood.jpg",
+      "skills": ["HTML / CSS", "SASS"],
+
+      "title": {
+         "FR": ["Oh My Food", "- OpenClassrooms"],
+         "EN": ["Oh My Food", "- OpenClassrooms"],
+         "JP": ["Oh My Food", "- 学校の課題"]
+      },
+
+      "description": {
+         "FR": "Projet N°3 - Rendre une page web dynamique avec des animations CSS.",
+         "EN": "Project N°3 - Make a web page dynamic with CSS animations.",
+         "JP": "CSS アニメーションを使用して Web ページを動かします。"
+      },
+
+      "createdAt": {
+         "FR": "Mars 2021",
+         "EN": "March 2021",
+         "JP": "2021年 3月"
+      },
+
+      "isGolden": false
+   },
+
+   {
+      "href": "https://seraphingithub.github.io/FatetSeraphin_4_12042021/",
+      "imageUrl": "./images/LaChouette.jpg",
+      "skills": ["HTML / CSS", "JavaScript", "SEO", "Accessibilité"],
+
+      "title": {
+         "FR": ["La Chouette",    "- OpenClassrooms"],
+         "EN": ["The Owl Agency", "- OpenClassrooms"],
+         "JP": ["The Owl Agency", "- 学校の課題"]
+      },
+
+      "description": {
+         "FR": "Projet N°4 - Optimisation SEO d'un site web existant.",
+         "EN": "Project N°4 - SEO Optimisation of an existing website.",
+         "JP": "既存のウェブサイトの SEO 最適化。"
+      },
+
+      "createdAt": {
+         "FR": "Avril 2021",
+         "EN": "April 2021",
+         "JP": "2021年 4月"
+      },
+
+      "isGolden": false
+   },
+
+   {
+      "href": "https://seraphingithub.github.io/FatetSeraphin_5_02062021_Online",
+      "imageUrl": "./images/Orinoco.jpg",
+      "skills": ["HTML / CSS", "JavaScript"],
+
+      "title": {
+         "FR": ["Orinoco", "- OpenClassrooms"],
+         "EN": ["Orinoco", "- OpenClassrooms"],
+         "JP": ["Orinoco", "- 学校の課題"]
+      },
+
+      "description": {
+         "FR": "Projet N°5 - Création de la partie front-end d'un site E-commerce.",
+         "EN": "Project N°5 - Front-end development of an E-shop website.",
+         "JP": "ショッピングサイトのフロントエンド部分の作成。"
+      },
+
+      "createdAt": {
+         "FR": "Juin 2021",
+         "EN": "June 2021",
+         "JP": "2021年 6月"
+      },
+
+      "isGolden": true
+   },
+
+   {
+      "href": "https://www.youtube.com/watch?v=2B86xBcuW1s",
+      "imageUrl": "./images/Groupomania.jpg",
+      "skills": ["JavaScript", "Vue.js", "Node.js", "Express", "MySQL", "Sequelize ORM", "SQL"],
+
+      "title": {
+         "FR": ["Groupomania", "- OpenClassrooms"],
+         "EN": ["Groupomania", "- OpenClassrooms"],
+         "JP": ["Groupomania", "- 学校の課題"]
+      },
+
+      "description": {
+         "FR": "Projet N°7 - Création d'un réseau social d'entreprise en version fullstack avec toutes les technologies associées.",
+         "EN": "Project N°7 - Development of an enterprise social network in fullstack version with all related technologies.",
+         "JP": "すべての関連テクノロジーを備えたFullstackバージョンで企業SNSを作成します。"
+      },
+
+      "createdAt": {
+         "FR": "Juillet 2021",
+         "EN": "July 2021",
+         "JP": "2021年 7月"
+      },
+
+      "isGolden": false
+   },
+
+   {
+      "href": "https://github.com/SeraphinGitHub/Social-Network---PHP",
+      "imageUrl": "./images/Social-Network-PHP.jpg",
+      "skills": ["PHP", "Twigg", "Composer", "MySQL", "SQL"],
+
+      "title": {
+         "FR": ["Réseau Social",  "- ENI"],
+         "EN": ["Social Network", "- ENI"],
+         "JP": ["SNS プロジェクト", "- 学校の課題"]
+      },
+
+      "description": {
+         "FR": "Projet avec ENI école informatique - Création d'un réseau social en environnement PHP fullstack, lien GitHub. (non déployé - Apprendre PHP)",
+         "EN": "Project with Nantes computing school - Development of a social network with PHP environment fullstack, GitHub link. (not deployed - Learn PHP)",
+         "JP": "コンピュータースクールとのプロジェクト - Fullstack、PHP 環境でのSNSの作成, GitHub リンク。 (デプロイされていません - PHPを学ぶ)"
+      },
+
+      "createdAt": {
+         "FR": "Décembre 2021",
+         "EN": "December 2021",
+         "JP": "2021年 12月"
+      },
+
+      "isGolden": false
+   },
+
+   {
+      "href": "https://heroic-adventure.onrender.com/",
+      "imageUrl": "./images/Heroic-Adventure.jpg",
+      "skills": ["HTML / CSS", "JavaScript", "Node.js", "Express", "Socket.io"],
+
+      "title": {
+         "FR": ["Heroic Adventure", "-MMORPG (Démo)"],
+         "EN": ["Heroic Adventure", "-MMORPG (Demo)"],
+         "JP": ["へロイック",         "アドベンチャー"]
+      },
+
+      "description": {
+         "FR": "Démo de flash-game multijoueurs en temps réel. >>> Attendre quelques secondes, serveur en veille. (Projet personnel - Me familiariser avec Socket.io)",
+         "EN": "Real-time multiplayers flash-game demo. >>> Wait few seconds, server in standby. (Personal project - Learn Socket.io package)",
+         "JP": "リアルタイム マルチプレイヤー フラッシュ ゲームのデモ。>>> 数秒お待ちください。サーバーはスタンバイ状態です。(個人プロジェクト - Socket.io パッケージの学習)"
+      },
+
+      "createdAt": {
+         "FR": "Février 2022",
+         "EN": "February 2022",
+         "JP": "2022年 2月"
+      },
+
+      "isGolden": true
+   },
+
+   {
+      "href": "https://github.com/SeraphinGitHub/Sword-Battle--Client/commits/master",
+      "imageUrl": "./images/Sword-Battle.jpg",
+      "skills": ["C#", "Unity Engine", "JavaScript", "Node.js", "Express", "Socket.io"],
+
+      "title": {
+         "FR": ["Sword Battle", "- App Android"],
+         "EN": ["Sword Battle", "- Android App"],
+         "JP": ["スワードバトル", "- Android アプリ"]
+      },
+
+      "description": {
+         "FR": "Application android de jeu d'arcade multijoueurs en temps réel, lien GitHub. (Projet personnel - Maintenir mes compétence en C# et Socket.io)",
+         "EN": "Android app, real-time multiplayer arcade game, GitHub link. (Personal project - Maintain my skills with C# and Socket.io)",
+         "JP": "Android アプリ、リアルタイム マルチプレイヤー アーケード ゲーム、GitHub リンク。(個人プロジェクト - C# と Socket.io のスキルを維持)"
+      },
+
+      "createdAt": {
+         "FR": "Juillet 2022",
+         "EN": "July 2022",
+         "JP": "2022年 7月"
+      },
+
+      "isGolden": false
+   },
+
+   {
+      "href": "https://sf-astar-pathfinding.netlify.app/",
+      "imageUrl": "./images/Astar-Pathfinder.jpg",
+      "skills": ["HTML / CSS", "JavaScript"],
+
+      "title": {
+         "FR": ["A* Pathfinder",    "algorithme (Démo)"],
+         "EN": ["A* Pathfinding",   "algorithm (Demo)"],
+         "JP": ["パスファインダー", "アルゴリズム"]
+      },
+
+      "description": {
+         "FR": "Démo d'algorithme de trouveur de chemin. (Projet personnel - Améliorer mes connaissances en algorithmique)",
+         "EN": "Pathfinding algorithm demo. (Personnal project - Improve my knowledge of algorithms)",
+         "JP": "パスファインダーアルゴリズムのデモンストレーション。 (個人プロジェクト - アルゴリズムの知識を向上させる)"
+      },
+
+      "createdAt": {
+         "FR": "Sept 2022",
+         "EN": "Sept 2022",
+         "JP": "2022年 9月"
+      },
+
+      "isGolden": false
+   },
+
+   {
+      "href": "https://sf-map-editor.netlify.app/",
+      "imageUrl": "./images/2D-map-editor.jpg",
+      "skills": ["Vue.js", "TypeScript"],
+
+      "title": {
+         "FR": ["Éditeur de carte 2D", "(M.V.P.)"],
+         "EN": ["2D Map Editor",       "(M.V.P. stage)"],
+         "JP": ["2Dマップエディター",     "(M.V.P. ステージ)"]
+      },
+
+      "description": {
+         "FR": "(MVP) Outil de création de cartes pour jeux en 2D, basé sur système de ''tuiles''. (Projet personnel - Apprendre TypeScript.)",
+         "EN": "(MVP) Map creation tool for 2D games, based on a ''tile'' system. (Personal project - Learn TypeScript.)",
+         "JP": "(MVP) 「タイル」システムに基づいた 2D ゲーム用のマップ作成ツール。 (個人プロジェクト - TypeScript を学ぶ)"
+      },
+
+      "createdAt": {
+         "FR": "Février 2023",
+         "EN": "February 2023",
+         "JP": "2023年 2月"
+      },
+
+      "isGolden": false
+   },
+
+   {
+      "href": "https://empire-rising.netlify.app/",
+      "imageUrl": "./images/Empire-Rising.jpg",
+      "skills": ["Vue.js", "TypeScript", "Node.js", "Express", "Socket.io"],
+
+      "title": {
+         "FR": ["Empire Rising", "RTS 2D"],
+         "EN": ["Empire Rising", "2D RTS"],
+         "JP": ["エンパヤ ライジング", "2D RTS"]
+      },
+
+      "description": {
+         "FR": "Démo de jeu de stratégie multijoueurs en temps réel. (Projet personnel - Aprofondir mes connaissances en TypeScript)",
+         "EN": "Real time strategy multiplayer game demo. (Personnal project - Improve my knowledge with TypeScript)",
+         "JP": "リアルタイム戦略マルチプレイヤーゲームのデモ。(個人プロジェクト - TypeScript に関する知識の向上)"
+      },
+
+      "createdAt": {
+         "FR": "Octobre 2022",
+         "EN": "October 2022",
+         "JP": "2022年 10月"
+      },
+
+      "isGolden": true
+   }
+]

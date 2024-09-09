@@ -25,33 +25,34 @@
       },
       
       props: {
-         responseList: Array,
+         selectedLang: String,
       },
 
       data() {
       return {
          isLoaded:     false,
-         projectsList: [],
+         responseList: [],
          langPack:     {},
-         selectedLang: "FR",
       }},
 
-      watch: {
-         responseList(newValue) {
-            if(newValue) this.generateProjects(newValue);
-         },
-      },
+      // ==> For async props 
+      // watch: {
+      //    responseList(newValue) {
+      //       if(newValue) this.generateProjects(newValue);
+      //    },
+      // },
 
       async mounted() {
+
+         await this.getProjects();
          await this.getLangPack();
+
+         await this.$nextTick(() => setTimeout(() => {
+            this.generateProjects();
+         }, 0));
       },
 
       methods: {
-
-         async getLangPack() {
-            this.langPack = await fetch("./lang.json")
-            .then(data => { return data.json() });
-         },
 
          closeOtherProject(projectID) {
             const projectRef = this.$refs.projectElem;
@@ -63,7 +64,19 @@
             }
          },
 
-         generateProjects(responseList) {
+         async getProjects() {
+            this.responseList = await fetch("./projects.json")
+            .then(data => { return data.json() });
+            
+            this.responseList.sort().reverse();
+         },
+
+         async getLangPack() {
+            this.langPack = await fetch("./lang.json")
+            .then(data => { return data.json() });
+         },
+
+         generateProjects() {
 
             let id    = 0;
             let count = 0;
@@ -72,7 +85,7 @@
             let tempsList    = [];
             let projectsList = [];
 
-            responseList.forEach((project) => {
+            this.responseList.forEach((project) => {
                project["id"] = id;
                id++;
                count++;
@@ -92,13 +105,12 @@
             if(tempsList.length > 0) projectsList.push(tempsList);
 
             this.projectsList = projectsList;
+            this.isLoaded     = true;
 
-            this.$nextTick(() => {
+            this.$nextTick(() => setTimeout(() => {
                const lastIndex = this.$refs.projectRow.length -1;
                if(tempsList.length === 2) this.$refs.projectRow[lastIndex].classList.add("space-between");
-            });
-
-            this.isLoaded = true;
+            }, 0));
          },
       }
    }

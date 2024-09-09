@@ -1,8 +1,10 @@
 
 <template>
+   <section class="sky-bgd fullCover">
 
-   <MainPage/>
+      <MainPage/>
 
+   </section>
 </template>
 
 <script>
@@ -25,6 +27,24 @@
       /* cursor: default; */
    }
 
+   .hide {
+      opacity: 0%;
+   }
+
+   .show {
+      opacity: 100%;
+      transition-duration: 3s;
+      transition-delay:    2s;
+   }
+
+   .fullCover {
+      position: fixed;
+      top:      0px;
+      left:     0px;
+      height:   100%;
+      width:    100%;
+   }
+
    .flexCenter {
       display: flex;
       flex-wrap: wrap;
@@ -35,6 +55,21 @@
 
    li {
       list-style: none;
+   }
+
+   .sky-bgd {
+      background: linear-gradient(to bottom right,
+         black,
+         dimgray,
+            dimgray,
+            dodgerblue,
+            dodgerblue,
+            lightblue,
+            lightblue,
+            dodgerblue,
+         dimgray,
+         black
+      );
    }
 
    /* Roboto Medium */

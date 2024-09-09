@@ -1,10 +1,9 @@
 <template>
-   <section class="flexCenter fullCover">
+   <section class="flexCenter fullCover hide" ref="main">
 
-      <div class="sky-bgd fullCover"/>
       <div class="black-filter fullCover"/>
       
-      <LangageBar class="lang-bar"
+      <LangageBar
          @changeLang="updateLang"
       />
 
@@ -34,7 +33,10 @@
       />
       
       <Galaxy/>
-      <ProjectFlow :responseList ="responseList"/>
+
+      <ProjectFlow
+         :selectedLang ="selectedLang"
+      />
 
    </section>
 </template>
@@ -64,7 +66,7 @@
       return {
          height:       window.innerHeight,
          width:        window.innerWidth,
-         responseList: [],
+         selectedLang: "FR",
          projectToWake: [
             "https://heroic-adventure.onrender.com/wake",
             // "https://bf-manager.onrender.com/wake",
@@ -72,9 +74,12 @@
       }},
 
       async mounted() {
-         
          await this.wakeUpProjects();
-         await this.getProjects();
+
+         this.$nextTick(() => setTimeout(() => {
+            this.$refs.main.classList.add("show");
+            this.$refs.main.classList.remove("hide");
+         }, 0));
       },
 
       methods: {
@@ -88,14 +93,7 @@
                .then( data     => { console.log(data)      })
                .catch(error    => { console.log(error)     });
             });
-         },
-
-         async getProjects() {
-            this.responseList = await fetch("./projects.json")
-            .then(data => { return data.json() });
-            
-            this.responseList.sort().reverse();
-         },
+         },         
 
          updateLang(lang) {
             this.selectedLang = lang;
@@ -110,14 +108,6 @@
 
    $DayNightAnim: 60s;
 
-   .fullCover {
-      position: fixed;
-      top:      0px;
-      left:     0px;
-      height:   100%;
-      width:    100%;
-   }
-
    .constellation {
       z-index: 10;
    }
@@ -125,21 +115,6 @@
    .rain {
       // opacity: 60%;
       animation: Day_and_Night $DayNightAnim ease-in-out infinite;
-   }
-
-   .sky-bgd {
-      background: linear-gradient(to bottom right,
-         black,
-         dimgray,
-            dimgray,
-            dodgerblue,
-            dodgerblue,
-            lightblue,
-            lightblue,
-            dodgerblue,
-         dimgray,
-         black
-      );
    }
 
    .black-filter {
