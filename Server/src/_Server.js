@@ -156,9 +156,14 @@ app.get("/reports", (req, res, next) => {
         .then((data) => {
         let reportPackage = {};
         for (let i = 0; i < data.length; i++) {
-            const report = data[i];
-            delete report._id;
-            delete report.__v;
+            const originalReport = data[i];
+            delete originalReport._id;
+            delete originalReport.__v;
+            const { ...rest } = originalReport;
+            const report = {
+                _Session_: "**************************************************************************************",
+                ...rest,
+            };
             reportPackage = organizeReport(reportPackage, report);
         }
         res.status(200).json(reportPackage);
