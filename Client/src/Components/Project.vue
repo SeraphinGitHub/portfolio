@@ -51,6 +51,7 @@
             project:      Object,
             langPack:     Object,
             selectedLang: String,
+            socket:       Object,
         },
 
         data() {
@@ -95,6 +96,10 @@
             },
 
             openProject() {
+                this.socket.emit("socketSend", {
+                    title:       this.project.title.EN[0],
+                    hasOpenLink: false,
+                });
 
                 this.isOpen = true;
                 const { project, figure, caption, btn, filter } = this.projectDOM;
@@ -113,8 +118,8 @@
             },
 
             closeProject() {
-
-                this.isOpen = false;
+                
+                this.isOpen     = false;
                 const { project, figure, caption, btn, filter } = this.projectDOM;
 
                 project.classList.remove("open-project");
@@ -137,6 +142,11 @@
             },
 
             goToPage() {
+                if(this.isOpen) this.socket.emit("socketSend", {
+                    title:       this.project.title.EN[0],
+                    hasOpenLink: true,
+                });
+                
                 window.open(this.project.href);
             },
         },

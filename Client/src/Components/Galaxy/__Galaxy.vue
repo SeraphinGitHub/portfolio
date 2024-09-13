@@ -1,6 +1,6 @@
 
 <template>
-   <section class="flex">
+   <section class="flex galaxy">
 
       <div class="spinal-black-ring">
          <div class="back"/>
@@ -86,6 +86,10 @@
 <style scoped lang="scss">
    
    $WiggleAnim: 15s;
+
+   .galaxy * {
+      user-select: none;
+   }
 
    .spinal-black-ring {
       z-index: 5;

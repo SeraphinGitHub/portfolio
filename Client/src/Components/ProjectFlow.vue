@@ -8,6 +8,7 @@
             :project      ="project"
             :langPack     ="langPack"
             :selectedLang ="selectedLang"
+            :socket       ="socket"
             @closeOthers  ="closeOtherProject"
          />
 
@@ -26,6 +27,7 @@
       
       props: {
          selectedLang: String,
+         socket:       Object,
       },
 
       data() {

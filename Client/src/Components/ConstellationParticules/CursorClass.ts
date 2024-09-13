@@ -24,6 +24,10 @@ export class CursorClass {
    starsList:    StarClass[] = [];
    explodedList: StarClass[] = [];
 
+   downTime_1: number = 0;
+   downTime_2: number = 0;
+   upTime:     number = 0;
+
    position:     Iposition   = {
       x: -this.radius,
       y: -this.radius,
@@ -52,11 +56,26 @@ export class CursorClass {
       }
    }
 
-   checkBound() {
+   attract() {
       const { x: mouseX }: Iposition = this.position;
       const leftBorder:    number    = this.Constellation.leftBorder;
+      
+      this.downTime_1 = Date.now();
+      
+      if(mouseX > leftBorder) {
+         this.isAttracting = true;
+         this.downTime_2   = Date.now();
+      }
+   }
 
-      if(mouseX > leftBorder) this.isAttracting = true;
+   explode(socket: any) {
+      this.isExploding = true;
+      this.upTime      = Date.now();
+
+      if(this.downTime_1 !== this.downTime_2) return;
+         
+      const downPeriod: number = this.upTime -this.downTime_1;
+      if(downPeriod >= 250) socket.emit("socketSend", { starsExplode: Math.floor(downPeriod /100) /10 } );
    }
 
    update() {

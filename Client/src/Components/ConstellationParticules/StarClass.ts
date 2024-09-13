@@ -156,16 +156,21 @@ export class StarClass {
       if(!this.hasExplode) return;
 
       const friction: number = this.friction;
+      const modifyer: number = friction *5;
       const { x: curVelo_X, y: curVelo_Y }: Iposition = this.velocity;
       const { x: oldVelo_X, y: oldVelo_Y }: Iposition = this.oldVelocity;
          
       this.velocity.x = this.updateVelocity(curVelo_X, oldVelo_X);
       this.velocity.y = this.updateVelocity(curVelo_Y, oldVelo_Y);
 
-      const isRange_X: boolean = (curVelo_X -friction < oldVelo_X) && (oldVelo_X < curVelo_X +friction);
-      const isRange_Y: boolean = (curVelo_Y -friction < oldVelo_Y) && (oldVelo_Y < curVelo_Y +friction);
+      const isRange_X: boolean = (curVelo_X -modifyer < oldVelo_X) && (oldVelo_X < curVelo_X +modifyer);
+      const isRange_Y: boolean = (curVelo_Y -modifyer < oldVelo_Y) && (oldVelo_Y < curVelo_Y +modifyer);
 
-      if(isRange_X && isRange_Y) this.hasExplode = false;
+      if(isRange_X && isRange_Y) {
+         this.hasExplode = false;
+         this.velocity.x = this.randVelocity();
+         this.velocity.y = this.randVelocity();
+      }
    }
 
    update(ctx: CanvasRenderingContext2D) {

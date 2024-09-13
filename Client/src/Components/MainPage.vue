@@ -4,7 +4,7 @@
       <div class="black-filter fullCover"/>
       
       <LangageBar
-         @changeLang="updateLang"
+         @changeLang ="updateLang"
       />
 
       <ConstellationParticules class="constellation"
@@ -12,6 +12,7 @@
          :starRange ="30"
          :starSize  ="10"
          :linkDist  ="120"
+         :socket    ="socket"
       />
 
       <RainParticules class="rain fullCover"
@@ -34,8 +35,9 @@
       
       <Galaxy/>
 
-      <ProjectFlow
-         :selectedLang ="selectedLang"
+      <ProjectFlow ref="projectFlow"
+         :selectedLang  ="selectedLang"
+         :socket        ="socket"
       />
 
    </section>
@@ -43,13 +45,15 @@
 
 
 <script>
+   window.logData = true;
+
    import LangageBar                from "./LangageBar.vue"
    import Galaxy                    from "./Galaxy/__Galaxy.vue"
    import ConstellationParticules   from "./ConstellationParticules/__ConstellationParticules.vue"
    import RainParticules            from "./RainParticules/__RainParticules.vue"
    import ProjectFlow               from "./ProjectFlow.vue"
 
-   // import { imgStr } from "../../Scripts/RainParticules/imgTo64_Barrack_Lighten"
+   import { io }                    from "socket.io-client";
 
    export default {
       name: "MainPage",
@@ -64,19 +68,40 @@
 
       data() {
       return {
-         height:       window.innerHeight,
-         width:        window.innerWidth,
+         // URL:          "http://localhost:3000",
+         URL:          "https://psf-manager.onrender.com",
+         height:        window.innerHeight,
+         width:         window.innerWidth,
          selectedLang: "FR",
+         openSession:   Date.now(),
+         socket:        null,
+         
          projectToWake: [
+            "https://psf-manager.onrender.com/wake",
             "https://heroic-adventure.onrender.com/wake",
             // "https://bf-manager.onrender.com/wake",
-         ]
+         ],
       }},
 
       async mounted() {
          await this.wakeUpProjects();
 
          this.$nextTick(() => setTimeout(() => {
+
+            this.socket = io(this.URL, {
+               transports:      ["websocket", "polling"],
+               withCredentials: true,
+            });
+
+            this.socket.on("socketConnected", () => {
+               this.socket.emit("socketSend", {
+                  openSession:  this.openSession,
+                  selectedLang: this.selectedLang,
+               });
+
+               this.update();
+            });
+
             this.$refs.main.classList.add("show");
             this.$refs.main.classList.remove("hide");
          }, 0));
@@ -88,17 +113,26 @@
             
             this.projectToWake.forEach(async (projectURL) => {
 
-               await fetch(projectURL)
-               .then( response => { return response.json() })
-               .then( data     => { console.log(data)      })
-               .catch(error    => { console.log(error)     });
+               await fetch(projectURL);
             });
          },         
 
-         updateLang(lang) {
-            this.selectedLang = lang;
+         updateLang(value) {
+            this.selectedLang = value;
+            this.socket.emit("socketSend", { lang: value });
          },
 
+         update() {
+
+            const inter_0 = setInterval(() => {
+               this.socket.emit("socketSend", { update: true });
+
+               if(!logData) {
+                  clearInterval(inter_0);
+                  this.socket.emit("logData");
+               }
+            }, 1000);
+         }
       },
    }
 </script>

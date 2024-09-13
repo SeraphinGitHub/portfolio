@@ -18,6 +18,7 @@
          starRange: Number,
          starSize:  Number,
          linkDist:  Number,
+         socket:    Object,
       },
 
       data() {
@@ -68,8 +69,8 @@
             
             window.addEventListener("resize",    (event) => this.Constellation!.resize(ctx, event));
             window.addEventListener("mousemove", (event) => this.Cursor!.setMousePos(event));
-            window.addEventListener("mousedown", (     ) => this.Cursor!.checkBound());
-            window.addEventListener("mouseup",   (     ) => this.Cursor!.isExploding  = true);
+            window.addEventListener("mousedown", (     ) => this.Cursor!.attract());
+            window.addEventListener("mouseup",   (     ) => this.Cursor!.explode(this.socket));
          },
 
          animation(ctx: CanvasRenderingContext2D) {
