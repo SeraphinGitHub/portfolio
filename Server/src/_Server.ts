@@ -11,6 +11,7 @@ import cors                from "cors";
 import dotenv              from "dotenv";
 import bodyParser          from "body-parser";
 import mongoose            from "mongoose";
+import axios               from "axios";
 
 import Report              from "./Model-Report";
 
@@ -41,6 +42,9 @@ const socketIO   = new Server(httpServer, {
 // =================================================================================
 // Methods
 // =================================================================================
+let isRuning: boolean = false;
+let inter_0:  any     = null;
+
 const fillReport = (
    emptyReport: any,
    data:        any,
@@ -159,6 +163,19 @@ const organizeReport = (
    return reportPackage;
 }
 
+const startAxios = () => {
+
+   axios.get("https://psf-manager.onrender.com/wake")
+   .then((response) => {
+
+      console.log(response.data, formatDate(Date.now()));
+      
+      const { message } = response.data;
+      if(message !== "Waking psf-manager !") isRuning = true;
+      
+   }).catch((error) => console.log(error));
+}
+
 
 // =================================================================================
 // SocketIO
@@ -213,6 +230,37 @@ socketIO.on("connection", (socket: Socket) => {
 // =================================================================================
 // Routes
 // =================================================================================
+app.get("/start", (
+   req:  Request,
+   res:  Response,
+   next: NextFunction,
+) => {
+   
+   startAxios();
+
+   if(isRuning) return res.status(200).json({ message: "Server already runing !" });
+
+   isRuning = true;
+
+   inter_0 = setInterval(() => startAxios(), 1000 *60 *5);
+
+   res.status(200).json({ message: "Start server loop !" });
+});
+
+
+app.get("/stop", (
+   req:  Request,
+   res:  Response,
+   next: NextFunction,
+) => {
+   
+   if(inter_0 === null) return res.status(350).json({ message: "Server not runing !" });
+   
+   clearInterval(inter_0);
+   res.status(200).json({ message: "Stop server loop !" });
+});
+
+
 app.get("/wake", (
    req:  Request,
    res:  Response,

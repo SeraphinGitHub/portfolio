@@ -13,6 +13,7 @@ const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const axios_1 = __importDefault(require("axios"));
 const Model_Report_1 = __importDefault(require("./Model-Report"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
@@ -37,6 +38,8 @@ const socketIO = new socket_io_1.Server(httpServer, {
 // =================================================================================
 // Methods
 // =================================================================================
+let isRuning = false;
+let inter_0 = null;
 const fillReport = (emptyReport, data) => {
     const { openSession, update, selectedLang, title, hasOpenLink, lang, starsExplode, } = data;
     if (update && typeof (update) === "boolean") {
@@ -109,6 +112,15 @@ const organizeReport = (reportPackage, report) => {
     reportPackage[monthSection].push(report);
     return reportPackage;
 };
+const startAxios = () => {
+    axios_1.default.get("https://psf-manager.onrender.com/wake")
+        .then((response) => {
+        console.log(response.data, formatDate(Date.now()));
+        const { message } = response.data;
+        if (message !== "Waking psf-manager !")
+            isRuning = true;
+    }).catch((error) => console.log(error));
+};
 // =================================================================================
 // SocketIO
 // =================================================================================
@@ -148,6 +160,20 @@ socketIO.on("connection", (socket) => {
 // =================================================================================
 // Routes
 // =================================================================================
+app.get("/start", (req, res, next) => {
+    startAxios();
+    if (isRuning)
+        return res.status(200).json({ message: "Server already runing !" });
+    isRuning = true;
+    inter_0 = setInterval(() => startAxios(), 1000 * 60 * 5);
+    res.status(200).json({ message: "Start server loop !" });
+});
+app.get("/stop", (req, res, next) => {
+    if (inter_0 === null)
+        return res.status(350).json({ message: "Server not runing !" });
+    clearInterval(inter_0);
+    res.status(200).json({ message: "Stop server loop !" });
+});
 app.get("/wake", (req, res, next) => {
     res.status(200).json({ message: "Waking psf-manager !" });
 });
